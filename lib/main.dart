@@ -83,16 +83,23 @@ class StartPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(32.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text('Start'),
-              RaisedButton(onPressed: () => Navigator.of(context).pop(), child: Text('戻る'),)
-            ],
+      body: Column(
+        children: [
+          Container(
+            child: Image.asset('images/image_interviewer.png'),
           ),
-        ),
+          Container(
+            padding: EdgeInsets.all(32.0),
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Text('Start'),
+                  RaisedButton(onPressed: () => Navigator.of(context).pop(), child: Text('戻る'),)
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: Colors.green,
           title: Text(
            'Get the job!',
             style: TextStyle(
@@ -31,6 +31,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      routes: <String, WidgetBuilder> {
+        '/start_page': (BuildContext context) => StartPage(),
+        '/edit_page': (BuildContext context) => EditPage(),
+      },
     );
   }
 }
@@ -38,8 +42,87 @@ class MyApp extends StatelessWidget {
 class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RaisedButton(
+                onPressed: () => Navigator.of(context).pushNamed("/start_page"),
+                child: Text(
+                  'Start',
+                  style: TextStyle(
+                  ),
+                ),
+              ),
+              RaisedButton(
+                onPressed: () => Navigator.of(context).pushNamed("/edit_page"),
+                child: Text(
+                  'Edit',
+                  style: TextStyle(
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+}
+
+class StartPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text(
+          'Get the job!',
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(32.0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Text('Start'),
+              RaisedButton(onPressed: () => Navigator.of(context).pop(), child: Text('戻る'),)
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
 
+class EditPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text(
+          'Get the job!',
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(32.0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Text('Edit'),
+              RaisedButton(onPressed: () => Navigator.of(context).pop(), child: Text('戻る'),)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

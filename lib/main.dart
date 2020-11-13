@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'question.dart';
 void main() {
   runApp(MyApp());
 }
+
+QuizBrain quizBrain = QuizBrain();
 
 class MyApp extends StatelessWidget {
   @override
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// AppPage is root widget.
 class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -51,17 +54,12 @@ class AppPage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pushNamed("/start_page"),
                 child: Text(
                   'Start',
-                  style: TextStyle(
-
-                  ),
                 ),
               ),
               RaisedButton(
                 onPressed: () => Navigator.of(context).pushNamed("/edit_page"),
                 child: Text(
                   'Edit',
-                  style: TextStyle(
-                  ),
                 ),
               ),
             ],
@@ -71,8 +69,16 @@ class AppPage extends StatelessWidget {
   }
 }
 
-class StartPage extends StatelessWidget {
+// todo: AppBarの共通化
+class StartPage extends StatefulWidget {
   @override
+  _StartPageState createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  @override
+  QuizBrain quizBrain = QuizBrain();
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -96,12 +102,18 @@ class StartPage extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                'Question:\n'
-                    'here will be filled question',
-                style: TextStyle(
-                  fontSize: 20
-                ),
+              child: Column(
+                children: [
+                  Text(
+                      "${quizBrain.answeredQuestion}/${quizBrain.numberOfQuestions}"
+                  ),
+                  Text(
+                    "${quizBrain.getQuestionText()}",
+                    style: TextStyle(
+                        fontSize: 20
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -122,12 +134,23 @@ class StartPage extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     color: Colors.amber,
-                    onPressed: () => Navigator.of(context).pop(), child: Text('Exit'),
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text('Exit'),
                   ),
                   SizedBox(width: 50),
                   RaisedButton(
                     color: Colors.green,
-                    onPressed: () => Navigator.of(context).pop(), child: Text('Next'),
+                    // onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => {
+                      setState((){
+                        quizBrain.nextQuestion();
+                        
+                        if(quizBrain.isFinished()){
+                          Navigator.of(context).pop();
+                        }
+                      }),
+                    },
+                    child: Text('Next'),
                   ),
                 ],
               ),
@@ -138,7 +161,6 @@ class StartPage extends StatelessWidget {
     );
   }
 }
-
 
 class EditPage extends StatelessWidget {
   @override
@@ -159,7 +181,10 @@ class EditPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text('Edit'),
-              RaisedButton(onPressed: () => Navigator.of(context).pop(), child: Text('戻る'),)
+              RaisedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('戻る'),
+              )
             ],
           ),
         ),

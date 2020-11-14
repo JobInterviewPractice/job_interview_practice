@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'setting.dart';
 void main() {
   runApp(MyApp());
 }
 
 QuizBrain quizBrain = QuizBrain();
+SettingPage setting = SettingPage();
 
 class MyApp extends StatelessWidget {
   @override
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         '/start_page': (BuildContext context) => StartPage(),
         '/edit_page': (BuildContext context) => EditPage(),
+        '/setting_page': (BuildContext context) => setting,
       },
     );
   }
@@ -62,6 +65,11 @@ class AppPage extends StatelessWidget {
                   'Edit',
                 ),
               ),
+              RaisedButton(
+                textColor: Color(0xFF6200EE),
+                onPressed: ()  => Navigator.of(context).pushNamed("/setting_page"),
+                child: Text("Setting"),
+              )
             ],
           ),
         ),

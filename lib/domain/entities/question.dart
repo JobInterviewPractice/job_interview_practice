@@ -3,7 +3,5 @@ class Question {
   String questionText;
   bool isWeek;
 
-  Question(String t) {
-    questionText = t;
-  }
+  Question(this.id,this.questionText,this.isWeek);
 }

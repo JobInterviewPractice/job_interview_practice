@@ -11,13 +11,9 @@ class Question {
 }
 
 class QuizBrain {
-
-
   int numberOfQuestions = 5; // todo: numberofquestionをsettings pageから引っ張ってくる。
-
   int _questionID = 0;
 
-  // counter
   int answeredQuestion = 0;
 
   // todo: change List to Map to be able to find question by `Question.id`

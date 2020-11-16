@@ -77,7 +77,6 @@ class AppPage extends StatelessWidget {
   }
 }
 
-// todo: AppBarの共通化
 class StartPage extends StatefulWidget {
   @override
   _StartPageState createState() => _StartPageState();

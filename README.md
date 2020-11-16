@@ -1,16 +1,45 @@
-# job_interview_practice
+## About
+* 
+## App Design
 
-A new Flutter application.
+Please see [figma](https://www.figma.com/file/WbtYeobvJ4Pe2acxgKNkkL/Figma-Basics?node-id=0%3A286).
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Archtecture(at the present)
+```
+.
+├── data
+│   ├── datasources
+│   │   └── question_service.dart
+│   └── models
+│       └── question.dart
+├── domain
+│   ├── entities
+│   │   └── question.dart
+│   └── repository
+│       └── question.dart
+├── main.dart
+├── presentation
+   ├── pages
+   │   ├── app.dart
+   │   ├── edit.dart
+   │   ├── home.dart
+   │   ├── setting.dart
+   │   └── start.dart
+   └── widgets
+       └── appBar.dart
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Feature
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### /home_page
+- Buttons to jump each app page.  
+### /start_page
+- ExitButton to exit.
+- NextButton to change current question  
+### /setting_page
+- 'number of question' button
+### /edit_page
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+

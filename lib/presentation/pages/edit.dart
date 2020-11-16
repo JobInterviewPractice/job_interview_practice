@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:job_interview_practice/presentation/widgets/appBar.dart';
 class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: Text(
-          'Get the job!',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
+      appBar: MyAppBar(),
       body: Container(
         padding: EdgeInsets.all(32.0),
         child: Center(

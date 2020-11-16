@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:job_interview_practice/presentation/widgets/appBar.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -12,15 +12,7 @@ class _StartPageState extends State<StartPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: Text(
-          'Get the job!',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
+      appBar: MyAppBar(),
       body: Column(
         children: [
           SizedBox(

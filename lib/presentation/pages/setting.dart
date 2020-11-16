@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:job_interview_practice/presentation/widgets/appBar.dart';
+
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
 
@@ -15,21 +16,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Text(""),
-        backgroundColor: Colors.teal,
-        title: Container(
-          margin: EdgeInsets.only(right: 56.0),
-          child: Center(
-            child: Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-      ),
+      appBar: MyAppBar(),
       body: Row(
         children: [
           Column(

@@ -89,10 +89,12 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       Switch(value: _values[0],
-                          onChanged: (value){
-                            setState((){
-                              _values[0] = value;
-                            });})
+                        onChanged: (value){
+                          setState((){
+                            _values[0] = value;
+                          });
+                          },
+                      ),
                     ],
                   )
                 ],

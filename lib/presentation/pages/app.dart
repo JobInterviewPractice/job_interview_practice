@@ -4,7 +4,6 @@ import 'package:job_interview_practice/presentation/pages/start.dart';
 import 'package:job_interview_practice/presentation/pages/setting.dart';
 import 'package:job_interview_practice/presentation/pages/edit.dart';
 import 'package:job_interview_practice/presentation/widgets/appBar.dart';
-import 'package:job_interview_practice/presentation/widgets/appBar.dart';
 
 class MyApp extends StatefulWidget {
   @override

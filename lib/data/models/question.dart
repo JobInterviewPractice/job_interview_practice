@@ -1,12 +1,17 @@
-import '../../domain/entities/question.dart';
+import 'package:job_interview_practice/domain/repository/question.dart';
 
-class QuestionModel extends Question {
+class QuestionModel extends QuestionRepository{
+
+  QuestionModel();
 
   String id;
   String questionText;
   bool isWeek;
 
-  QuestionModel(String id, String questionText, bool isWeek) : super(id, questionText, isWeek);
-  QuestionModel.zero() : super.zero();
+  // todo:implementing after setting datastore.(firestore)
+  @override
+  QuestionModel selectByID(String id){}
+  @override
+  List<QuestionModel> selectAll(){}
 }
 

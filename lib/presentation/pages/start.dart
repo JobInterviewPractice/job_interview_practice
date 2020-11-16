@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:job_interview_practice/presentation/widgets/appBar.dart';
-
+import 'package:job_interview_practice/data/datasources/question_service.dart';
 class StartPage extends StatefulWidget {
   @override
   _StartPageState createState() => _StartPageState();
+
 }
 
 class _StartPageState extends State<StartPage> {
-  @override
-  QuizBrain quizBrain = QuizBrain();
 
+  QuestionService questionService = QuestionService.init(5,0);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
@@ -28,10 +35,10 @@ class _StartPageState extends State<StartPage> {
               child: Column(
                 children: [
                   Text(
-                      "${quizBrain.answeredQuestion}/${quizBrain.numberOfQuestions}"
+                      "${questionService.answeredQuestion}/${questionService.numberOfQuestions}"
                   ),
                   Text(
-                    "${quizBrain.getQuestionText()}",
+                    "${questionService.questionText}",
                     style: TextStyle(
                         fontSize: 20
                     ),
@@ -66,9 +73,8 @@ class _StartPageState extends State<StartPage> {
                     // onPressed: () => Navigator.of(context).pop(),
                     onPressed: () => {
                       setState((){
-                        quizBrain.nextQuestion();
-
-                        if(quizBrain.isFinished()){
+                        questionService.nextQuestion();
+                        if(questionService.answeredQuestion == questionService.numberOfQuestions + 1){
                           Navigator.of(context).pop();
                         }
                       }),

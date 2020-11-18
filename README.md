@@ -31,3 +31,11 @@ Please see [figma](https://www.figma.com/file/WbtYeobvJ4Pe2acxgKNkkL/Figma-Basic
    └── widgets
        └── appBar.dart
 ```
+
+### addtional features
+* 他の人が苦手なquestionのlist化。サーバーがわでクエスチョンのレビューを集計している。
+  - よく使われている質問をlist化してランキングにしてもいいかも
+* 自分が独自に考えたquestionをアップできる。掲示板みたいなイメージ。(自分が考えたquestionが他の人にも使われているとuserとしてはやる気が出る？)
+* 回答例が上がっているといいかも？？
+
+Please see [figma](https://www.figma.com/file/WbtYeobvJ4Pe2acxgKNkkL/Figma-Basics?node-id=0%3A286).  

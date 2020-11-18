@@ -9,7 +9,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
 
-  QuestionService questionService = QuestionService.init(5,0);
+  QuestionService questionService = QuestionService(5);
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _StartPageState extends State<StartPage> {
                       "${questionService.answeredQuestion}/${questionService.numberOfQuestions}"
                   ),
                   Text(
-                    "${questionService.questionText}",
+                    "${questionService.getQuestionText()}",
                     style: TextStyle(
                         fontSize: 20
                     ),

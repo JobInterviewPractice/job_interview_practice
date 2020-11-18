@@ -1,17 +1,10 @@
-import 'package:job_interview_practice/domain/repository/question.dart';
+import 'package:job_interview_practice/domain/entities/question.dart';
 
-class QuestionModel extends QuestionRepository{
 
-  QuestionModel();
-
+class QuestionModel extends Question{
   String id;
   String questionText;
   bool isWeek;
+  // todo additional field to connect outside world ??
 
-  // todo:implementing after setting datastore.(firestore)
-  @override
-  QuestionModel selectByID(String id){}
-  @override
-  List<QuestionModel> selectAll(){}
 }
-

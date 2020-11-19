@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-
-
+import 'package:job_interview_practice/presentation/widgets/appBar.dart';
 
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
@@ -14,25 +12,11 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   String dropdownValue = '10';
   int count = 1;
-      List<bool> _values = [true];
+  List<bool> _values = [true];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Text(""),
-        backgroundColor: Colors.teal,
-        title: Container(
-          margin: EdgeInsets.only(right: 56.0),
-          child: Center(
-            child: Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-      ),
+      appBar: MyAppBar(),
       body: Row(
         children: [
           Column(
@@ -69,57 +53,50 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                         ),
                       ),
-    DropdownButton<String>(
-    value: dropdownValue,
-    elevation: 16,
-    style: TextStyle(color: Colors.deepPurple),
-    underline: Container(
-    height: 2,
-    color: Colors.deepPurpleAccent,
-    ),
-    onChanged: (String newValue) {
-    setState(() {
-    dropdownValue = newValue;
-    });
-    },
-    items: <String>['10', '20', '30', '40']
-                .map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-    value: value,
-    child: Text(value),
-    );
-    }).toList(),
-    )
+                      DropdownButton<String>(
+                        value: dropdownValue,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>['10', '20', '30', '40']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      )
 
                     ],
                   ),
-
-Row(
-    children: [
-    Padding(
-    padding: const EdgeInsets.all(24.0),
-    child: Container(
-    child:
-    Text(
-    "ONLY WEEK QUESTION"
-    ),
-    ),
-    ),
-      Switch(value: _values[0],
-          onChanged: (value){
-          setState((){
-           _values[0] = value;
-    });})
-      ],
-
-
-)
-
-
-
-
-
-
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Container(
+                          child:
+                          Text(
+                              "ONLY WEEK QUESTION"
+                          ),
+                        ),
+                      ),
+                      Switch(value: _values[0],
+                        onChanged: (value){
+                          setState((){
+                            _values[0] = value;
+                          });
+                          },
+                      ),
+                    ],
+                  )
                 ],
               ),
             ],
@@ -128,7 +105,7 @@ Row(
       ),
     );
   }
-    }
+}
 
 
 

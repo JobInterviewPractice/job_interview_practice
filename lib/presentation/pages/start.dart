@@ -12,7 +12,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   // Todo: remove hardcode
   QuestionService questionService =
-      QuestionService(5, QuestionModel("2", "good", true));
+      QuestionService(3, QuestionModel("2", "good", true));
 
   @override
   void initState() {
@@ -76,7 +76,7 @@ class _StartPageState extends State<StartPage> {
                         () {
                           questionService.nextQuestion();
                           if (questionService.answeredQuestion ==
-                              questionService.numberOfQuestions + 1) {
+                              questionService.numberOfQuestions) {
                             Navigator.of(context).pop();
                           }
                         },

@@ -4,8 +4,6 @@ import 'package:job_interview_practice/data/models/question.dart';
 import 'package:job_interview_practice/data/repositories/question_repository.dart';
 
 class QuestionRepositoryImpl implements QuestionRepository {
-  // todo:implementing after setting datastore.(firestore)
-
   Future<QuestionModel> selectByID(String questionID) async {
     try {
       await Firebase.initializeApp();
@@ -22,5 +20,21 @@ class QuestionRepositoryImpl implements QuestionRepository {
     }
   }
 
-  List<QuestionModel> selectAll() {}
+  Future<List<QuestionModel>> selectByRandom(int numberOfQuestion) async {
+    try {
+      await Firebase.initializeApp();
+      final FirebaseFirestore instance = FirebaseFirestore.instance;
+      final groups = await instance.collection('questions').get();
+      List<QueryDocumentSnapshot> response = groups.docs;
+      List<QuestionModel> questionModels = [];
+      for (int i = 0; i < numberOfQuestion; i++) {
+        questionModels.add(QuestionModel(response[i].get("id"),
+            response[i].get("question_text"), response[i].get("is_weak")));
+      }
+      return questionModels;
+    } catch (e) {
+      print("err!!!!!!");
+      print(e);
+    }
+  }
 }

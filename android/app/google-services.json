@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1026294278272",
+    "firebase_url": "https://job-interview-b5639.firebaseio.com",
+    "project_id": "job-interview-b5639",
+    "storage_bucket": "job-interview-b5639.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026294278272:android:a2a8e4254c9f3098445e65",
+        "android_client_info": {
+          "package_name": "com.example.job_interview_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026294278272-rf16bia98eplo4e05d2f846f1rl7objs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDktzREwu9T6r-TZ0ToVG32ka5qVJ-v9Q4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026294278272-rf16bia98eplo4e05d2f846f1rl7objs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

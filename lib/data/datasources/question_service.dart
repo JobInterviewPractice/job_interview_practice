@@ -2,10 +2,10 @@ import 'package:job_interview_practice/data/models/question.dart';
 import 'package:job_interview_practice/data/repositories/question_repository_impl.dart';
 
 class QuestionService {
-  QuestionService(this.numberOfQuestions,this.nowQuestion);
+  QuestionService(this.numberOfQuestions, this.nowQuestion);
 
   int numberOfQuestions; // todo: numberofquestionをsettings pageから引っ張ってくる。
-  int answeredQuestion;
+  int answeredQuestion = 0;
   QuestionModel nowQuestion;
 
   int getAnsweredQuestion() {
@@ -16,9 +16,10 @@ class QuestionService {
     return nowQuestion.questionText;
   }
 
-  void nextQuestion() {
+  void nextQuestion() async {
     QuestionRepositoryImpl qr = QuestionRepositoryImpl();
-    nowQuestion = qr.selectByID("");
+    nowQuestion = await qr.selectByID("dfas");
+    print(nowQuestion);
     this.answeredQuestion++;
   }
 }

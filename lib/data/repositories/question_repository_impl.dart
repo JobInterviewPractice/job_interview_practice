@@ -3,6 +3,6 @@ import 'package:job_interview_practice/data/repositories/question_repository.dar
 
 class QuestionRepositoryImpl implements QuestionRepository {
   // todo:implementing after setting datastore.(firestore)
-  QuestionModel selectByID(String id){}
-  List<QuestionModel> selectAll(){}
+  QuestionModel selectByID(String id) {}
+  List<QuestionModel> selectAll() {}
 }

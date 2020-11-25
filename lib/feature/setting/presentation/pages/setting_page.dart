@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
+import 'package:job_interview_practice/feature/setting/data/setting_service.dart';
 
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
@@ -13,6 +14,15 @@ class _SettingPageState extends State<SettingPage> {
   String dropdownValue = '10';
   int count = 1;
   List<bool> _values = [true];
+
+  SettingService settingService = SettingService();
+  // todo: 実装
+  @override
+  void initState() {
+    super.initState();
+    this.settingService = SettingService();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,24 +59,26 @@ class _SettingPageState extends State<SettingPage> {
                           child: Text("NUMBER OF QUESTION"),
                         ),
                       ),
-                      DropdownButton<String>(
-                        value: dropdownValue,
+                      DropdownButton<int>(
+                        value: settingService.getSetting_NumberOfQuestion(),
                         elevation: 16,
                         style: TextStyle(color: Colors.deepPurple),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
                         ),
-                        onChanged: (String newValue) {
+                        onChanged: (int newValue) {
                           setState(() {
-                            dropdownValue = newValue;
+                            // todo: implement
+                            settingService
+                                .setSetting_NumberOfQuestion(newValue);
                           });
                         },
-                        items: <String>['10', '20', '30', '40']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
+                        items: <int>[10, 20, 30, 40]
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value.toString()),
                           );
                         }).toList(),
                       )
@@ -81,10 +93,12 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       Switch(
-                        value: _values[0],
+                        value: settingService.getSetting_OnlyWeakQuestion(),
                         onChanged: (value) {
                           setState(() {
-                            _values[0] = value;
+                            bool newValue = value;
+                            settingService
+                                .setSetting_OnlyWeakQuestion(newValue);
                           });
                         },
                       ),

@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             ),
             RaisedButton(
               textColor: Color(0xFF6200EE),
-              onPressed: ()  => Navigator.of(context).pushNamed("/setting_page"),
+              onPressed: () => Navigator.of(context).pushNamed("/setting_page"),
               child: Text("Setting"),
             )
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:job_interview_practice/feature/question/presentation/pages/edit.dart';
-import 'package:job_interview_practice/feature/question/presentation/pages/home.dart';
-import 'package:job_interview_practice/feature/question/presentation/pages/setting.dart';
-import 'package:job_interview_practice/feature/question/presentation/pages/start.dart';
-import 'package:job_interview_practice/feature/question/presentation/widgets/appBar.dart';
+import 'package:job_interview_practice/feature/edit/presentation/pages/edit_page.dart';
+import 'package:job_interview_practice/feature/home/presentation/home_page.dart';
+import 'package:job_interview_practice/feature/setting/presentation/pages/setting_page.dart';
+import 'package:job_interview_practice/feature/start/presentation/pages/start_page.dart';
+import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
 
 class MyApp extends StatefulWidget {
   @override

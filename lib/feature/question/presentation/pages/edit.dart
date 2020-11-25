@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:job_interview_practice/presentation/widgets/appBar.dart';
+import 'package:job_interview_practice/feature/question/presentation/widgets/appBar.dart';
+
 class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

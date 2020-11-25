@@ -1,5 +1,5 @@
-import 'package:job_interview_practice/data/models/question.dart';
-import 'package:job_interview_practice/data/repositories/question_repository_impl.dart';
+import 'package:job_interview_practice/feature/question/data/models/question.dart';
+import 'package:job_interview_practice/feature/question/data/repositories/question_repository_impl.dart';
 
 class QuestionService {
   QuestionService(this.numberOfQuestions, this.nowQuestion) {

@@ -1,4 +1,4 @@
-import 'package:job_interview_practice/domain/entities/question.dart';
+import 'package:job_interview_practice/feature/question/domain/entities/question.dart';
 
 class QuestionModel extends Question {
   QuestionModel(this.id, this.questionText, this.isWeek);

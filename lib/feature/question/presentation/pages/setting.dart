@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_interview_practice/data/datasources/setting_service.dart';
-import 'package:job_interview_practice/presentation/widgets/appBar.dart';
+import 'package:job_interview_practice/feature/question/presentation/widgets/appBar.dart';
 
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);

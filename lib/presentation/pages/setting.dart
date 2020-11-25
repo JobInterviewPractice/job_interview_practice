@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_interview_practice/data/datasources/setting_service.dart';
 import 'package:job_interview_practice/presentation/widgets/appBar.dart';
 
 class SettingPage extends StatefulWidget {
@@ -13,6 +14,15 @@ class _SettingPageState extends State<SettingPage> {
   String dropdownValue = '10';
   int count = 1;
   List<bool> _values = [true];
+
+  AppSettingService appSettingService;
+  // todo: 実装
+  @override
+  void initState() {
+    super.initState();
+    this.appSettingService = AppSettingService();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,35 +56,32 @@ class _SettingPageState extends State<SettingPage> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Container(
-                          child:
-
-                          Text(
-                              "NUMBER OF QUESTION"
-                          ),
+                          child: Text("NUMBER OF QUESTION"),
                         ),
                       ),
-                      DropdownButton<String>(
-                        value: dropdownValue,
+                      DropdownButton<int>(
+                        value: appSettingService.getSetting_NumberOfQuestion(),
                         elevation: 16,
                         style: TextStyle(color: Colors.deepPurple),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
                         ),
-                        onChanged: (String newValue) {
+                        onChanged: (int newValue) {
                           setState(() {
-                            dropdownValue = newValue;
+                            // todo: implement
+                            appSettingService
+                                .setSetting_NumberOfQuestion(newValue);
                           });
                         },
-                        items: <String>['10', '20', '30', '40']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
+                        items: <int>[10, 20, 30, 40]
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value.toString()),
                           );
                         }).toList(),
                       )
-
                     ],
                   ),
                   Row(
@@ -82,18 +89,18 @@ class _SettingPageState extends State<SettingPage> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Container(
-                          child:
-                          Text(
-                              "ONLY WEEK QUESTION"
-                          ),
+                          child: Text("ONLY WEEK QUESTION"),
                         ),
                       ),
-                      Switch(value: _values[0],
-                        onChanged: (value){
-                          setState((){
-                            _values[0] = value;
+                      Switch(
+                        value: appSettingService.getSetting_OnlyWeakQuestion(),
+                        onChanged: (value) {
+                          setState(() {
+                            bool newValue = value;
+                            appSettingService
+                                .setSetting_OnlyWeakQuestion(newValue);
                           });
-                          },
+                        },
                       ),
                     ],
                   )
@@ -106,6 +113,3 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 }
-
-
-

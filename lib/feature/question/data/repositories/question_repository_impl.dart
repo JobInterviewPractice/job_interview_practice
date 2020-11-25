@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:job_interview_practice/data/models/question.dart';
-import 'package:job_interview_practice/data/repositories/question_repository.dart';
+import 'package:job_interview_practice/feature/question/data/models/question.dart';
+import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 
 class QuestionRepositoryImpl implements QuestionRepository {
   Future<QuestionModel> selectByID(String questionID) async {

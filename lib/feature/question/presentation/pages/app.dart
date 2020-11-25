@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:job_interview_practice/presentation/pages/home.dart';
-import 'package:job_interview_practice/presentation/pages/start.dart';
-import 'package:job_interview_practice/presentation/pages/setting.dart';
-import 'package:job_interview_practice/presentation/pages/edit.dart';
-import 'package:job_interview_practice/presentation/widgets/appBar.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/edit.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/home.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/setting.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/start.dart';
+import 'package:job_interview_practice/feature/question/presentation/widgets/appBar.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         '/start_page': (BuildContext context) => StartPage(),
         '/edit_page': (BuildContext context) => EditPage(),
         '/setting_page': (BuildContext context) => SettingPage(),

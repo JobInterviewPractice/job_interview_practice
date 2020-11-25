@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_interview_practice/presentation/widgets/appBar.dart';
+import 'package:job_interview_practice/feature/question/presentation/widgets/appBar.dart';
 
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
@@ -46,11 +46,7 @@ class _SettingPageState extends State<SettingPage> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Container(
-                          child:
-
-                          Text(
-                              "NUMBER OF QUESTION"
-                          ),
+                          child: Text("NUMBER OF QUESTION"),
                         ),
                       ),
                       DropdownButton<String>(
@@ -74,7 +70,6 @@ class _SettingPageState extends State<SettingPage> {
                           );
                         }).toList(),
                       )
-
                     ],
                   ),
                   Row(
@@ -82,18 +77,16 @@ class _SettingPageState extends State<SettingPage> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Container(
-                          child:
-                          Text(
-                              "ONLY WEEK QUESTION"
-                          ),
+                          child: Text("ONLY WEEK QUESTION"),
                         ),
                       ),
-                      Switch(value: _values[0],
-                        onChanged: (value){
-                          setState((){
+                      Switch(
+                        value: _values[0],
+                        onChanged: (value) {
+                          setState(() {
                             _values[0] = value;
                           });
-                          },
+                        },
                       ),
                     ],
                   )
@@ -106,6 +99,3 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 }
-
-
-

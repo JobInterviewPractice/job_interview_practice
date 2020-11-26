@@ -1,5 +1,4 @@
 class Question {
-
   Question();
 
   String id;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
-  String apptitle = 'Get The Job!';
+  final String appBarTitle;
 
-  MyAppBar({this.apptitle})
+  MyAppBar({this.appBarTitle = 'Get The Job!'})
       : super(
           backgroundColor: Colors.teal,
           title: Text(

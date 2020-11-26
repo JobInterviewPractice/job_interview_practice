@@ -13,7 +13,7 @@ class EditPage extends StatelessWidget {
             children: <Widget>[
               Text('Edit'),
               RaisedButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: Navigator.of(context).pop,
                 child: Text('戻る'),
               )
             ],

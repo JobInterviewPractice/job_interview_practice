@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
-import 'package:job_interview_practice/feature/setting/data/setting_service.dart';
+import 'package:job_interview_practice/feature/setting/data/datasources/setting_service.dart';
 
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
@@ -11,17 +11,10 @@ class SettingPage extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _SettingPageState extends State<SettingPage> {
-  String dropdownValue = '10';
-  int count = 1;
-  List<bool> _values = [true];
+  int dropdownValue = 10;
+  bool onlyWeak = false;
 
   SettingService settingService = SettingService();
-  // todo: 実装
-  @override
-  void initState() {
-    super.initState();
-    this.settingService = SettingService();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +53,7 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       DropdownButton<int>(
-                        value: settingService.getSetting_NumberOfQuestion(),
+                        value: dropdownValue,
                         elevation: 16,
                         style: TextStyle(color: Colors.deepPurple),
                         underline: Container(
@@ -69,9 +62,9 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         onChanged: (int newValue) {
                           setState(() {
-                            // todo: implement
-                            settingService
-                                .setSetting_NumberOfQuestion(newValue);
+                            settingService.setSettingValue(
+                                'NumberOfQuestion', newValue);
+                            dropdownValue = newValue;
                           });
                         },
                         items: <int>[10, 20, 30, 40]
@@ -93,12 +86,16 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       Switch(
-                        value: settingService.getSetting_OnlyWeakQuestion(),
+                        value: onlyWeak,
                         onChanged: (value) {
                           setState(() {
-                            bool newValue = value;
-                            settingService
-                                .setSetting_OnlyWeakQuestion(newValue);
+                            // 内部データの書き換え
+                            print(value);
+                            print(settingService);
+                            settingService.setSettingValue(
+                                'OnlyWeekQuestion', value);
+                            // 表示の切り替えa
+                            onlyWeak = value;
                           });
                         },
                       ),

@@ -89,12 +89,8 @@ class _SettingPageState extends State<SettingPage> {
                         value: onlyWeak,
                         onChanged: (value) {
                           setState(() {
-                            // 内部データの書き換え
-                            print(value);
-                            print(settingService);
                             settingService.setSettingValue(
                                 'OnlyWeekQuestion', value);
-                            // 表示の切り替えa
                             onlyWeak = value;
                           });
                         },

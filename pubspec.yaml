@@ -12,9 +12,11 @@ dependencies:
     sdk: flutter
   cloud_firestore: ^0.14.2
   firebase_core: ^0.5.1
-
-
-
+  shared_preferences: ^0.5.12+4
+  dartz:
+  equatable:
+  flutter_bloc:
+  get_it: ^5.0.1
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

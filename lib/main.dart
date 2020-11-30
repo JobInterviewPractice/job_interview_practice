@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
-import 'presentation/pages/app.dart';
+import 'package:job_interview_practice/dependencies.dart';
+import 'package:job_interview_practice/feature/main/presentation/main_page.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupDependencies();
+  runApp(MyApp());
+}

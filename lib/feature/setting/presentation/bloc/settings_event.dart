@@ -6,10 +6,10 @@ class ChangeNumberOfQuestion extends SettingsEvent {
   ChangeNumberOfQuestion(this.value);
 }
 
-class ChangeOnlyWeekSwitch extends SettingsEvent {
+class ChangeOnlyWeakSwitch extends SettingsEvent {
   final bool value;
 
-  ChangeOnlyWeekSwitch(this.value);
+  ChangeOnlyWeakSwitch(this.value);
 }
 
 class SetupSettingsEvent extends SettingsEvent {}

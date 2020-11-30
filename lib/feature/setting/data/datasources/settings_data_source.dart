@@ -1,22 +1,23 @@
 import 'package:job_interview_practice/core/local_storage/local_storage.dart';
 import 'package:job_interview_practice/core/logic/usecase.dart';
 import 'package:job_interview_practice/feature/setting/data/models/number_of_questions_model.dart';
-import 'package:job_interview_practice/feature/setting/data/models/only_week_question_model.dart';
+import 'package:job_interview_practice/feature/setting/data/models/only_weak_question_model.dart';
 
 abstract class SettingsDataSource {
   Future<NumberOfQuestionModel> getNumberOfQuestions();
-  Future<OnlyWeekQuestionModel> getOnlyWeekQuestion();
+  Future<OnlyWeakQuestionModel> getOnlyWeakQuestion();
   Future<NoOutput> setNumberOfQuestions(int input);
-  Future<NoOutput> setOnlyWeekQuestion(bool input);
+  Future<NoOutput> setOnlyWeakQuestion(bool input);
 }
 
 const String NumberOfQuestionsKey = '_NumberOfQuestionsKey';
-const String OnlyWeekQuestionKey = '_OnlyWeekQuestionKey';
+const String OnlyWeakQuestionKey = '_OnlyWeakQuestionKey';
 
 class SettingsDataSourceImpl extends SettingsDataSource {
   final LocalStorage _localStorage;
 
-  SettingsDataSourceImpl({LocalStorage localStorage}) : _localStorage = localStorage;
+  SettingsDataSourceImpl({LocalStorage localStorage})
+      : _localStorage = localStorage;
   @override
   Future<NumberOfQuestionModel> getNumberOfQuestions() async {
     final result = await _localStorage.getIntData(NumberOfQuestionsKey);
@@ -24,9 +25,9 @@ class SettingsDataSourceImpl extends SettingsDataSource {
   }
 
   @override
-  Future<OnlyWeekQuestionModel> getOnlyWeekQuestion() async {
-    final result = await _localStorage.getBoolData(OnlyWeekQuestionKey);
-    return OnlyWeekQuestionModel(result ?? false);
+  Future<OnlyWeakQuestionModel> getOnlyWeakQuestion() async {
+    final result = await _localStorage.getBoolData(OnlyWeakQuestionKey);
+    return OnlyWeakQuestionModel(result ?? false);
   }
 
   @override
@@ -36,8 +37,8 @@ class SettingsDataSourceImpl extends SettingsDataSource {
   }
 
   @override
-  Future<NoOutput> setOnlyWeekQuestion(bool input) async {
-    await _localStorage.setBoolData(OnlyWeekQuestionKey, input);
+  Future<NoOutput> setOnlyWeakQuestion(bool input) async {
+    await _localStorage.setBoolData(OnlyWeakQuestionKey, input);
     return NoOutput();
   }
 }

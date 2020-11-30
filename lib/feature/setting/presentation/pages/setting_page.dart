@@ -61,9 +61,11 @@ class SettingPage extends StatelessWidget {
                                   color: Colors.deepPurpleAccent,
                                 ),
                                 onChanged: (int newValue) {
-                                  BlocProvider.of<SettingsDropdownBloc>(context).add(ChangeNumberOfQuestion(newValue));
+                                  BlocProvider.of<SettingsDropdownBloc>(context)
+                                      .add(ChangeNumberOfQuestion(newValue));
                                 },
-                                items: <int>[10, 20, 30, 40].map<DropdownMenuItem<int>>((int value) {
+                                items: <int>[10, 20, 30, 40]
+                                    .map<DropdownMenuItem<int>>((int value) {
                                   return DropdownMenuItem<int>(
                                     value: value,
                                     child: Text(value.toString()),
@@ -83,7 +85,7 @@ class SettingPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(24.0),
                           child: Container(
-                            child: Text("ONLY WEEK QUESTION"),
+                            child: Text("ONLY WEAK QUESTION"),
                           ),
                         ),
                         BlocBuilder<SettingsSwitchBloc, SettingsState>(
@@ -92,7 +94,8 @@ class SettingPage extends StatelessWidget {
                               return Switch(
                                 value: state.onlyWeak,
                                 onChanged: (value) {
-                                  BlocProvider.of<SettingsSwitchBloc>(context).add(ChangeOnlyWeekSwitch(value));
+                                  BlocProvider.of<SettingsSwitchBloc>(context)
+                                      .add(ChangeOnlyWeakSwitch(value));
                                 },
                               );
                             }

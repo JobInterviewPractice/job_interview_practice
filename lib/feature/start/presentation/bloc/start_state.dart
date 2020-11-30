@@ -12,3 +12,5 @@ class LoadedStartState extends StartState {
   int numberOfAnsweringQuestions;
   int numberOfTotalQuestions;
 }
+
+class FinishQuestionState extends StartState {}

@@ -1,7 +1,7 @@
 abstract class StartEvent {}
 
-class SetupStart extends StartEvent {}
+class SetupStartEvent extends StartEvent {}
 
-class NextStartEvent extends StartEvent {}
-
-class ExitStartEvent extends StartEvent {}
+class NextStartEvent extends StartEvent {
+  NextStartEvent();
+}

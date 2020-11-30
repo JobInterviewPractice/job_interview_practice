@@ -6,6 +6,7 @@ import 'package:job_interview_practice/feature/setting/domain/usecases/get_numbe
 import 'package:job_interview_practice/feature/setting/domain/usecases/get_only_weak_question_use_case.dart';
 import 'package:job_interview_practice/feature/setting/presentation/bloc/settings_dropdown_bloc.dart';
 import 'package:job_interview_practice/feature/setting/presentation/bloc/settings_switch_bloc.dart';
+import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
 
 import 'core/local_storage/local_storage.dart';
 import 'feature/setting/domain/usecases/set_number_of_question_use_case.dart';
@@ -49,4 +50,7 @@ void _setupSettingsDependencies() {
   serviceLocator.registerFactory<SettingsSwitchBloc>(() => SettingsSwitchBloc(
       getOnlyWeakQuestionUseCase: serviceLocator(),
       setOnlyWeakQuestionUseCase: serviceLocator()));
+
+  // todo: impl for constructor
+  serviceLocator.registerFactory<StartNextBloc>(() => StartNextBloc());
 }

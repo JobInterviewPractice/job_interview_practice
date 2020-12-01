@@ -29,7 +29,7 @@ class SettingPage extends StatelessWidget {
                         onPressed: () => Navigator.of(context).pop(),
                         child: Row(
                           children: [
-                            Icon(Icons.fast_rewind),
+                            Icon(Icons.arrow_back_ios_sharp),
                             Text(
                               'SETTINGS',
                               style: TextStyle(

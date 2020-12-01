@@ -17,6 +17,7 @@ dependencies:
   equatable:
   flutter_bloc:
   get_it: ^5.0.1
+  cached_network_image: ^2.0.0
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

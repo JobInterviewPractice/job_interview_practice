@@ -5,6 +5,7 @@ import 'package:job_interview_practice/dependencies.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_event.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_state.dart';
+import 'package:job_interview_practice/feature/start/presentation/widgets/start_image.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -165,20 +166,6 @@ class StartPage extends StatelessWidget {
               },
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class StartImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 100),
-        child: Container(
-          child: Image.asset('images/image_interviewer.png'),
         ),
       ),
     );

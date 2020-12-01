@@ -9,9 +9,10 @@ class HomePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(4),
       child: ButtonTheme(
         minWidth: 180,
-        height: 70,
+        height: 40,
         child: RaisedButton(
           child: Text(
             buttonName,

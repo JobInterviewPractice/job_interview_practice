@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_interview_practice/feature/home/presentation/widget/raisedButton.dart';
+import 'package:job_interview_practice/feature/home/presentation/widget/raised_button_widget.dart';
 
 class HomePage extends StatelessWidget {
   @override

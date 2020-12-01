@@ -12,8 +12,9 @@ class SettingsDropdownBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetNumberOfQuestionUseCase _getNumberOfQuestionUseCase;
   final SetNumberOfQuestionUseCase _setNumberOfQuestionUseCase;
 
-  SettingsDropdownBloc({
-    GetNumberOfQuestionUseCase getNumberOfQuestionUseCase, SetNumberOfQuestionUseCase setNumberOfQuestionUseCase})
+  SettingsDropdownBloc(
+      {GetNumberOfQuestionUseCase getNumberOfQuestionUseCase,
+      SetNumberOfQuestionUseCase setNumberOfQuestionUseCase})
       : _getNumberOfQuestionUseCase = getNumberOfQuestionUseCase,
         _setNumberOfQuestionUseCase = setNumberOfQuestionUseCase,
         super(LoadingSettingsState()) {
@@ -31,9 +32,9 @@ class SettingsDropdownBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  Stream<SettingsState> _eitherLoaded(Either<Failure, NumberOfQuestionsEntity> either) async* {
-    yield either.fold(
-            (_) => LoadedSettingsStateDropdown(dropdownValue: 10),
-            (r) => LoadedSettingsStateDropdown(dropdownValue: r.number));
+  Stream<SettingsState> _eitherLoaded(
+      Either<Failure, NumberOfQuestionsEntity> either) async* {
+    yield either.fold((_) => LoadedSettingsStateDropdown(dropdownValue: 1),
+        (r) => LoadedSettingsStateDropdown(dropdownValue: r.number));
   }
 }

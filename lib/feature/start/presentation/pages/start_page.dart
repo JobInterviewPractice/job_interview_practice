@@ -6,18 +6,11 @@ import 'package:job_interview_practice/feature/start/presentation/bloc/start_eve
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_state.dart';
 
-class StartPage extends StatefulWidget {
-  @override
-  _StartPageState createState() => _StartPageState();
-}
-
-class _StartPageState extends State<StartPage> {
+class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => serviceLocator<StartNextBloc>()),
-      ],
+    return BlocProvider(
+      create: (_) => serviceLocator<StartNextBloc>(),
       child: Scaffold(
         appBar: MyAppBar(),
         body: Column(
@@ -38,9 +31,9 @@ class _StartPageState extends State<StartPage> {
                       child: Column(
                         children: [
                           Text(
-                              "${state.numberOfAnsweringQuestions}/${state.numberOfTotalQuestions}"),
+                              "${state.numberOfAnswering}/${state.totalNumber}"),
                           Text(
-                            state.nowQuestion,
+                            state.question.questionText,
                             style: TextStyle(fontSize: 20),
                           ),
                         ],
@@ -66,9 +59,10 @@ class _StartPageState extends State<StartPage> {
                 );
               },
             ),
+            Spacer(),
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(100.0),
+                padding: const EdgeInsets.symmetric(horizontal: 100),
                 child: Container(
                   child: Image.asset('images/image_interviewer.png'),
                 ),
@@ -91,7 +85,7 @@ class _StartPageState extends State<StartPage> {
                           color: Colors.green,
                           onPressed: () => {
                             BlocProvider.of<StartNextBloc>(context)
-                                .add(NextStartEvent())
+                                .add(NextQuestionEvent())
                           },
                           child: Text('Next'),
                         );

@@ -1,16 +1,15 @@
+import 'package:job_interview_practice/feature/question/domain/entities/question.dart';
+
 abstract class StartState {}
 
 class LoadingStartState extends StartState {}
 
 class LoadedStartState extends StartState {
-  LoadedStartState(
-      {this.nowQuestion,
-      this.numberOfAnsweringQuestions,
-      this.numberOfTotalQuestions});
+  final Question question;
+  final int numberOfAnswering;
+  final int totalNumber;
 
-  String nowQuestion;
-  int numberOfAnsweringQuestions;
-  int numberOfTotalQuestions;
+  LoadedStartState({this.question, this.numberOfAnswering, this.totalNumber});
 }
 
 class FinishQuestionState extends StartState {}

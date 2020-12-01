@@ -21,7 +21,7 @@ class SettingsDataSourceImpl extends SettingsDataSource {
   @override
   Future<NumberOfQuestionModel> getNumberOfQuestions() async {
     final result = await _localStorage.getIntData(NumberOfQuestionsKey);
-    return NumberOfQuestionModel(result ?? 10);
+    return NumberOfQuestionModel(result ?? 1);
   }
 
   @override

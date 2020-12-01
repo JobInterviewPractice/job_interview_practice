@@ -64,7 +64,7 @@ class SettingPage extends StatelessWidget {
                                   BlocProvider.of<SettingsDropdownBloc>(context)
                                       .add(ChangeNumberOfQuestion(newValue));
                                 },
-                                items: <int>[10, 20, 30, 40]
+                                items: <int>[1, 2, 3]
                                     .map<DropdownMenuItem<int>>((int value) {
                                   return DropdownMenuItem<int>(
                                     value: value,

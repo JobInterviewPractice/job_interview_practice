@@ -17,17 +17,14 @@ class HomePage extends StatelessWidget {
               buttonName: "Start",
               pathName: "/start_page",
             ),
-            Padding(padding: EdgeInsets.all(10)),
             HomePageButton(
               buttonName: "Setting",
               pathName: "/setting_page",
             ),
-            Padding(padding: EdgeInsets.all(10)),
             HomePageButton(
               buttonName: "Questions",
               pathName: "/edit_page",
             ),
-            Padding(padding: EdgeInsets.all(10)),
             HomePageButton(
               buttonName: "Recordings",
               pathName: "/review_page",

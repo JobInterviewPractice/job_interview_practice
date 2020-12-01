@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:job_interview_practice/core/logic/usecase.dart';
 import 'package:job_interview_practice/feature/question/domain/entities/question.dart';
 import 'package:job_interview_practice/feature/setting/domain/usecases/get_number_of_question_use_case.dart';
 import 'package:job_interview_practice/feature/start/domain/usecases/select_random_question_use_case.dart';
@@ -10,13 +11,18 @@ class StartNextBloc extends Bloc<StartEvent, StartState> {
   final SelectRandomQuestionUseCase selectRandomQuestionUseCase;
   List<Question> _questions;
   int _currentQuestion = -1;
+  int _numberOfQuestions;
 
-  StartNextBloc({this.getNumberOfQuestionUseCase, this.selectRandomQuestionUseCase}) : super(LoadingStartState()) {
+  StartNextBloc(
+      {this.getNumberOfQuestionUseCase, this.selectRandomQuestionUseCase})
+      : super(LoadingStartState()) {
     _loading();
   }
 
   void _loading() async {
-    _questions = await selectRandomQuestionUseCase(1);
+    final either = await getNumberOfQuestionUseCase(NoInput());
+    _numberOfQuestions = either.fold((l) => 1, (r) => r.number);
+    _questions = await selectRandomQuestionUseCase(_numberOfQuestions);
     add(NextQuestionEvent());
   }
 

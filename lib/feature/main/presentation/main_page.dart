@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
 import 'package:job_interview_practice/feature/edit/presentation/pages/edit_page.dart';
 import 'package:job_interview_practice/feature/home/presentation/home_page.dart';
 import 'package:job_interview_practice/feature/setting/presentation/pages/setting_page.dart';
 import 'package:job_interview_practice/feature/start/presentation/pages/start_page.dart';
-import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: MyAppBar(),
+        appBar: MyAppBar(appBarTitle: "Get The Job!"),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),

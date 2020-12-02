@@ -16,26 +16,15 @@ class SettingPage extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<SettingsSwitchBloc>())
       ],
       child: Scaffold(
-        appBar: MyAppBar(),
+        appBar: MyAppBar(appBarTitle: 'SETTINGS'),
         body: Row(
           children: [
             Column(
               children: [
                 Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(32.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            'SETTINGS',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(
+                      height: 100,
                     ),
                     Row(
                       children: [

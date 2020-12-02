@@ -5,7 +5,7 @@ class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: MyAppBar(appBarTitle: 'EDIT'),
       body: Container(
         padding: EdgeInsets.all(32.0),
         child: Center(

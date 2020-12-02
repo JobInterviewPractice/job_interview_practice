@@ -12,7 +12,7 @@ class StartPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => serviceLocator<StartNextBloc>(),
       child: Scaffold(
-        appBar: MyAppBar(),
+        appBar: MyAppBar(appBarTitle: "Get The Job!"),
         body: Column(
           children: [
             SizedBox(

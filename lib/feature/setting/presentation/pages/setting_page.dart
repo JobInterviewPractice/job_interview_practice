@@ -25,20 +25,16 @@ class SettingPage extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.all(32.0),
-                      child: FlatButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Row(
-                          children: [
-                            Icon(Icons.fast_rewind),
-                            Text(
-                              'SETTINGS',
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w900,
-                              ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'SETTINGS',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w900,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     Row(

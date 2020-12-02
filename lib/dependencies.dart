@@ -1,6 +1,12 @@
 import 'package:get_it/get_it.dart';
+import 'package:job_interview_practice/core/local_storage/db_wrapper.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository_impl.dart';
+import 'package:job_interview_practice/feature/recordings/data/datasources/recordings_local_data_source.dart';
+import 'package:job_interview_practice/feature/recordings/data/repositories/recordings_repository_impl.dart';
+import 'package:job_interview_practice/feature/recordings/domain/repositories/recordings_repository.dart';
+import 'package:job_interview_practice/feature/recordings/domain/usecases/get_recordings_usecase.dart';
+import 'package:job_interview_practice/feature/recordings/presentation/bloc/recordings_bloc.dart';
 import 'package:job_interview_practice/feature/setting/data/datasources/settings_data_source.dart';
 import 'package:job_interview_practice/feature/setting/data/repositories/settings_repository_impl.dart';
 import 'package:job_interview_practice/feature/setting/domain/repositories/settings_repository.dart';
@@ -21,10 +27,12 @@ void setupDependencies() {
   _setupCommonDependencies();
   _setupSettingsDependencies();
   _setupStartDependencies();
+  _setupRecordingsDependencies();
 }
 
 void _setupCommonDependencies() {
   serviceLocator.registerSingleton<LocalStorage>(LocalStorage());
+  serviceLocator.registerSingleton<DBWrapper>(DBWrapper());
 }
 
 void _setupSettingsDependencies() {
@@ -61,4 +69,18 @@ void _setupStartDependencies() {
   //blocs
   serviceLocator.registerFactory<StartNextBloc>(
       () => StartNextBloc(getNumberOfQuestionUseCase: serviceLocator(), selectRandomQuestionUseCase: serviceLocator()));
+}
+
+void _setupRecordingsDependencies() {
+  // data source
+  serviceLocator.registerSingleton<RecordingsLocalDataSource>(RecordingsLocalDataSourceImpl(serviceLocator()));
+
+  // repositories
+  serviceLocator.registerFactory<RecordingsRepository>(() => RecordingsRepositoryImpl(dataSource: serviceLocator()));
+
+  //usecases
+  serviceLocator.registerFactory<GetRecordingsUseCase>(() => GetRecordingsUseCase(repository: serviceLocator()));
+
+  // blocs
+  serviceLocator.registerFactory<RecordingsBloc>(() => RecordingsBloc(getRecordingsUseCase: serviceLocator()));
 }

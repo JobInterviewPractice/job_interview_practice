@@ -12,4 +12,7 @@ class LoadedStartState extends StartState {
   LoadedStartState({this.question, this.numberOfAnswering, this.totalNumber});
 }
 
-class FinishQuestionState extends StartState {}
+class FinishQuestionState extends StartState {
+  final List<Question> questions;
+  FinishQuestionState(this.questions);
+}

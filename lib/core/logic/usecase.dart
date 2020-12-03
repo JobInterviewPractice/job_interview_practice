@@ -6,6 +6,10 @@ abstract class UseCase<Input, Output> {
   Future<Either<Failure, Output>> call(Input input);
 }
 
+abstract class UseCaseRight<Input, Output> {
+  Future<Output> call(Input input);
+}
+
 class NoOutput extends Equatable {
   @override
   List<Object> get props => [];

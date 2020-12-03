@@ -28,6 +28,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
       List<QueryDocumentSnapshot> response = groups.docs;
       List<QuestionModel> questionModels = [];
       for (int i = 0; i < numberOfQuestion; i++) {
+        if (i >= response.length) break;
         questionModels.add(QuestionModel(response[i].get("id"),
             response[i].get("question_text"), response[i].get("is_weak")));
       }

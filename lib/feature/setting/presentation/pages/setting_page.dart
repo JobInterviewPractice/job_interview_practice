@@ -16,30 +16,15 @@ class SettingPage extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<SettingsSwitchBloc>())
       ],
       child: Scaffold(
-        appBar: MyAppBar(),
+        appBar: MyAppBar(appBarTitle: 'SETTINGS'),
         body: Row(
           children: [
             Column(
               children: [
                 Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(32.0),
-                      child: FlatButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Row(
-                          children: [
-                            Icon(Icons.arrow_back_ios_sharp),
-                            Text(
-                              'SETTINGS',
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    SizedBox(
+                      height: 100,
                     ),
                     Row(
                       children: [
@@ -64,7 +49,7 @@ class SettingPage extends StatelessWidget {
                                   BlocProvider.of<SettingsDropdownBloc>(context)
                                       .add(ChangeNumberOfQuestion(newValue));
                                 },
-                                items: <int>[10, 20, 30, 40]
+                                items: <int>[1, 2, 3]
                                     .map<DropdownMenuItem<int>>((int value) {
                                   return DropdownMenuItem<int>(
                                     value: value,

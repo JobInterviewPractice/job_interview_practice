@@ -58,6 +58,8 @@ class EditWidget extends StatelessWidget {
               },
             ),
           ),
+          IconButton(
+              icon: Icon(Icons.add_circle), onPressed: () => {print("pressed")})
         ],
       ),
       // todo: question add button in fix position

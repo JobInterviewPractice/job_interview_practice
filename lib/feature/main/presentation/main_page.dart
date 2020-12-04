@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
 import 'package:job_interview_practice/feature/edit/presentation/pages/edit_page.dart';
 import 'package:job_interview_practice/feature/home/presentation/home_page.dart';
+import 'package:job_interview_practice/feature/recordings/presentation/pages/recordings_page.dart';
 import 'package:job_interview_practice/feature/setting/presentation/pages/setting_page.dart';
 import 'package:job_interview_practice/feature/start/presentation/pages/start_page.dart';
 
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         '/start_page': (BuildContext context) => StartPage(),
         '/edit_page': (BuildContext context) => EditPage(),
         '/setting_page': (BuildContext context) => SettingPage(),
+        '/recordings_page': (BuildContext context) => RecordingsPage()
       },
     );
   }

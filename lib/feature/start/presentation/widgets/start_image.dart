@@ -6,7 +6,7 @@ class StartImage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100),
         child: Container(
-          child: Image.asset('images/image_interviewer.png'),
+          child: Image.asset('images/image_interviewer.png', height: 120,),
         ),
       ),
     );

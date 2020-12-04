@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
             ),
             HomePageButton(
               buttonName: "Recordings",
-              pathName: "/review_page",
+              pathName: "/recordings_page",
             ),
           ],
         ),

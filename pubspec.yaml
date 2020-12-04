@@ -18,10 +18,19 @@ dependencies:
   flutter_bloc:
   get_it: ^5.0.1
   cupertino_icons: ^1.0.0
+  camera: ^0.5.8+11
+  path_provider: ^1.6.24
+  hive: ^1.4.4+1
+  intl: ^0.16.1
+  video_player: ^1.0.1
+  chewie: ^0.12.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^0.8.1
+  build_runner:
+
 flutter:
   uses-material-design: true
   assets:

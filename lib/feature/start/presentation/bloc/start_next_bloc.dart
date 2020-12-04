@@ -31,7 +31,7 @@ class StartNextBloc extends Bloc<StartEvent, StartState> {
   Stream<StartState> mapEventToState(StartEvent event) async* {
     ++_currentQuestion;
     if (_currentQuestion >= _questions.length) {
-      yield FinishQuestionState();
+      yield FinishQuestionState(_questions);
     } else {
       yield LoadedStartState(
           question: _questions[_currentQuestion],

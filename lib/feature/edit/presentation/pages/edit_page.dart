@@ -93,7 +93,7 @@ class PictureCard extends StatelessWidget {
   final bool isWeak;
 
   // todo:こっちをいじる
-  TextEditingController _quoteController = TextEditingController(text: "test");
+  TextEditingController _quoteController = TextEditingController(text: "testt");
 
   PictureCard({this.questionText, this.isWeak});
 

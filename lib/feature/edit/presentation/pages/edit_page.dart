@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
+import 'package:job_interview_practice/dependencies.dart';
+import 'package:job_interview_practice/feature/edit/presentation/bloc/edit_bloc.dart';
+import 'package:job_interview_practice/feature/edit/presentation/bloc/edit_state.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class EditPage extends StatelessWidget {
@@ -46,23 +50,36 @@ class EditWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-    return Container(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: _cardList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _cardList[index];
-              },
+    return BlocProvider(
+      create: (_) => serviceLocator<EditBloc>(),
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<EditBloc, EditState>(
+                builder: (context, state) {
+                  if (state is LoadingEditState) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is LoadedEditState) {
+                    return ListView.builder(
+                      itemCount: _cardList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return _cardList[index];
+                      },
+                    );
+                  }
+                  return Center(child: Text("something wrong"));
+                },
+              ),
             ),
-          ),
-          IconButton(
-              icon: Icon(Icons.add_circle), onPressed: () => {print("pressed")})
-        ],
+            IconButton(
+                icon: Icon(Icons.add_circle),
+                onPressed: () => {print("pressed")})
+          ],
+        ),
+        // todo: question add button in fix position
       ),
-      // todo: question add button in fix position
     );
   }
 }

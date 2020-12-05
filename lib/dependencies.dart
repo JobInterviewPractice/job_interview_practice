@@ -16,7 +16,8 @@ import 'package:job_interview_practice/feature/setting/presentation/bloc/setting
 import 'package:job_interview_practice/feature/setting/presentation/bloc/settings_switch_bloc.dart';
 import 'package:job_interview_practice/feature/start/domain/usecases/select_random_question_use_case.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
-
+import 'feature/edit/presentation/bloc/edit_bloc.dart';
+import 'feature/edit/presentation/bloc/edit_state.dart';
 import 'core/local_storage/local_storage.dart';
 import 'feature/setting/domain/usecases/set_number_of_question_use_case.dart';
 import 'feature/setting/domain/usecases/set_only_weak_question_use_case.dart';
@@ -57,6 +58,7 @@ void _setupSettingsDependencies() {
       SettingsDropdownBloc(getNumberOfQuestionUseCase: serviceLocator(), setNumberOfQuestionUseCase: serviceLocator()));
   serviceLocator.registerFactory<SettingsSwitchBloc>(() =>
       SettingsSwitchBloc(getOnlyWeakQuestionUseCase: serviceLocator(), setOnlyWeakQuestionUseCase: serviceLocator()));
+  serviceLocator.registerFactory<EditBloc>(() => EditBloc());
 }
 
 void _setupStartDependencies() {

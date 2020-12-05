@@ -62,10 +62,14 @@ class EditWidget extends StatelessWidget {
                   if (state is LoadingEditState) {
                     return Center(child: CircularProgressIndicator());
                   } else if (state is LoadedEditState) {
+                    print(state);
                     return ListView.builder(
-                      itemCount: _cardList.length,
+                      itemCount: state.allQuestions.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return _cardList[index];
+                        return PictureCard(
+                            questionText:
+                                state.allQuestions[index].questionText,
+                            isWeak: state.allQuestions[index].isWeek);
                       },
                     );
                   }
@@ -88,6 +92,7 @@ class PictureCard extends StatelessWidget {
   final String questionText;
   final bool isWeak;
 
+  // todo:こっちをいじる
   TextEditingController _quoteController = TextEditingController(text: "test");
 
   PictureCard({this.questionText, this.isWeak});

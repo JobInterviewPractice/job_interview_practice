@@ -16,9 +16,9 @@ import 'package:job_interview_practice/feature/setting/presentation/bloc/setting
 import 'package:job_interview_practice/feature/setting/presentation/bloc/settings_switch_bloc.dart';
 import 'package:job_interview_practice/feature/start/domain/usecases/select_random_question_use_case.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
-import 'feature/edit/presentation/bloc/edit_bloc.dart';
-import 'feature/edit/presentation/bloc/edit_state.dart';
+
 import 'core/local_storage/local_storage.dart';
+import 'feature/edit/presentation/bloc/edit_bloc.dart';
 import 'feature/setting/domain/usecases/set_number_of_question_use_case.dart';
 import 'feature/setting/domain/usecases/set_only_weak_question_use_case.dart';
 
@@ -29,6 +29,7 @@ void setupDependencies() {
   _setupSettingsDependencies();
   _setupStartDependencies();
   _setupRecordingsDependencies();
+  _setupEditDependencies();
 }
 
 void _setupCommonDependencies() {
@@ -38,51 +39,66 @@ void _setupCommonDependencies() {
 
 void _setupSettingsDependencies() {
   // data source
-  serviceLocator.registerSingleton<SettingsDataSource>(SettingsDataSourceImpl(localStorage: serviceLocator()));
+  serviceLocator.registerSingleton<SettingsDataSource>(
+      SettingsDataSourceImpl(localStorage: serviceLocator()));
 
   // repositories
-  serviceLocator.registerFactory<SettingsRepository>(() => SettingRepositoryImpl(dataSource: serviceLocator()));
+  serviceLocator.registerFactory<SettingsRepository>(
+      () => SettingRepositoryImpl(dataSource: serviceLocator()));
 
   //usecases
-  serviceLocator
-      .registerFactory<GetNumberOfQuestionUseCase>(() => GetNumberOfQuestionUseCase(repository: serviceLocator()));
-  serviceLocator
-      .registerFactory<GetOnlyWeakQuestionUseCase>(() => GetOnlyWeakQuestionUseCase(repository: serviceLocator()));
-  serviceLocator
-      .registerFactory<SetNumberOfQuestionUseCase>(() => SetNumberOfQuestionUseCase(repository: serviceLocator()));
-  serviceLocator
-      .registerFactory<SetOnlyWeakQuestionUseCase>(() => SetOnlyWeakQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<GetNumberOfQuestionUseCase>(
+      () => GetNumberOfQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<GetOnlyWeakQuestionUseCase>(
+      () => GetOnlyWeakQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<SetNumberOfQuestionUseCase>(
+      () => SetNumberOfQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<SetOnlyWeakQuestionUseCase>(
+      () => SetOnlyWeakQuestionUseCase(repository: serviceLocator()));
 
   // blocs
   serviceLocator.registerFactory<SettingsDropdownBloc>(() =>
-      SettingsDropdownBloc(getNumberOfQuestionUseCase: serviceLocator(), setNumberOfQuestionUseCase: serviceLocator()));
-  serviceLocator.registerFactory<SettingsSwitchBloc>(() =>
-      SettingsSwitchBloc(getOnlyWeakQuestionUseCase: serviceLocator(), setOnlyWeakQuestionUseCase: serviceLocator()));
-  serviceLocator.registerFactory<EditBloc>(() => EditBloc());
+      SettingsDropdownBloc(
+          getNumberOfQuestionUseCase: serviceLocator(),
+          setNumberOfQuestionUseCase: serviceLocator()));
+  serviceLocator.registerFactory<SettingsSwitchBloc>(() => SettingsSwitchBloc(
+      getOnlyWeakQuestionUseCase: serviceLocator(),
+      setOnlyWeakQuestionUseCase: serviceLocator()));
 }
 
 void _setupStartDependencies() {
   //repositories
-  serviceLocator.registerFactory<QuestionRepository>(() => QuestionRepositoryImpl());
-  //usecases
   serviceLocator
-      .registerFactory<SelectRandomQuestionUseCase>(() => SelectRandomQuestionUseCase(repository: serviceLocator()));
+      .registerFactory<QuestionRepository>(() => QuestionRepositoryImpl());
+  //usecases
+  serviceLocator.registerFactory<SelectRandomQuestionUseCase>(
+      () => SelectRandomQuestionUseCase(repository: serviceLocator()));
 
   //blocs
-  serviceLocator.registerFactory<StartNextBloc>(
-      () => StartNextBloc(getNumberOfQuestionUseCase: serviceLocator(), selectRandomQuestionUseCase: serviceLocator()));
+  serviceLocator.registerFactory<StartNextBloc>(() => StartNextBloc(
+      getNumberOfQuestionUseCase: serviceLocator(),
+      selectRandomQuestionUseCase: serviceLocator()));
 }
 
 void _setupRecordingsDependencies() {
   // data source
-  serviceLocator.registerSingleton<RecordingsLocalDataSource>(RecordingsLocalDataSourceImpl(serviceLocator()));
+  serviceLocator.registerSingleton<RecordingsLocalDataSource>(
+      RecordingsLocalDataSourceImpl(serviceLocator()));
 
   // repositories
-  serviceLocator.registerFactory<RecordingsRepository>(() => RecordingsRepositoryImpl(dataSource: serviceLocator()));
+  serviceLocator.registerFactory<RecordingsRepository>(
+      () => RecordingsRepositoryImpl(dataSource: serviceLocator()));
 
   //usecases
-  serviceLocator.registerFactory<GetRecordingsUseCase>(() => GetRecordingsUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<GetRecordingsUseCase>(
+      () => GetRecordingsUseCase(repository: serviceLocator()));
 
   // blocs
-  serviceLocator.registerFactory<RecordingsBloc>(() => RecordingsBloc(getRecordingsUseCase: serviceLocator()));
+  serviceLocator.registerFactory<RecordingsBloc>(
+      () => RecordingsBloc(getRecordingsUseCase: serviceLocator()));
+}
+
+void _setupEditDependencies() {
+  serviceLocator.registerFactory<EditBloc>(
+      () => EditBloc(questionRepositoryImpl: QuestionRepositoryImpl()));
 }

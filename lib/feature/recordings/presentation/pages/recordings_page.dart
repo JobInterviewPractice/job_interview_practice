@@ -6,6 +6,8 @@ import 'package:job_interview_practice/feature/recordings/presentation/bloc/reco
 import 'package:job_interview_practice/feature/recordings/presentation/pages/recording_details_page.dart';
 
 class RecordingsPage extends StatelessWidget {
+  var _selectedValue = 'Play';
+  var _usStates = ["Play", "Delete"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +29,39 @@ class RecordingsPage extends StatelessWidget {
                     leading: Text(index.toString()),
                     title: Text(item.title),
                     subtitle: Text("Answered on ${item.model.questions.length} questions"),
-                    trailing: Icon(Icons.play_circle_fill),
-                    onTap: () {
+                    trailing: Scaffold(
+                  persistentFooterButtons: <Widget>[
+                      PopupMenuButton<String>(
+                        initialValue: _selectedValue,
+                        onSelected: (String s) {
+                          setState(() {
+                            _selectedValue = s;
+                          });
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return _usStates.map((String s) {
+                            return PopupMenuItem(
+                              child: Text(s),
+                              value: s,
+                            );
+                          }).toList();
+                        },
+                      )
+                    ],
+                //    onTap: () {
+                      if (_selectedValue == "Play"){
                       Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
-                    },
+                    }else if (_selectedValue == "Delete"){
+                    builder: (BuildContext context, AsyncSnapshot<Tag> snapshot) {
+                      if (mapController.ready &&
+                          snapshot.hasData &&
+                          snapshot.data.mobile.nid != 0) {
+                        tag = snapshot.data;
+                        widget.tagStream.sink.add(Tag());
+                      }
+                  }
+                  },
+                  )
                   );
                 },
               );

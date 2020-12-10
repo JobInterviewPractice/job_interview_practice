@@ -24,7 +24,7 @@ class RecordingsPage extends StatelessWidget {
                 itemBuilder: (_, index) {
                   final item = state.models[index];
                   return ListTile(
-                    leading: Text(index.toString()),
+                    leading: Text((index+1).toString()),
                     title: Text(item.title),
                     subtitle: Text("Answered on ${item.model.questions.length} questions"),
                     trailing: Icon(Icons.play_circle_fill),

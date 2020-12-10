@@ -17,85 +17,71 @@ class SettingPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: MyAppBar(appBarTitle: 'SETTINGS'),
-        body: Row(
-          children: [
-            Column(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Container(
-                            child: Text("NUMBER OF QUESTION"),
+        body: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text("NUMBER OF QUESTION"),
+                  SizedBox(width: 24,),
+                  BlocBuilder<SettingsDropdownBloc, SettingsState>(
+                    builder: (context, state) {
+                      if (state is LoadedSettingsStateDropdown) {
+                        return DropdownButton<int>(
+                          value: state.dropdownValue,
+                          elevation: 16,
+                          style: TextStyle(color: Colors.deepPurple),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
                           ),
-                        ),
-                        BlocBuilder<SettingsDropdownBloc, SettingsState>(
-                          builder: (context, state) {
-                            if (state is LoadedSettingsStateDropdown) {
-                              return DropdownButton<int>(
-                                value: state.dropdownValue,
-                                elevation: 16,
-                                style: TextStyle(color: Colors.deepPurple),
-                                underline: Container(
-                                  height: 2,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                                onChanged: (int newValue) {
-                                  BlocProvider.of<SettingsDropdownBloc>(context)
-                                      .add(ChangeNumberOfQuestion(newValue));
-                                },
-                                items: <int>[1, 2, 3]
-                                    .map<DropdownMenuItem<int>>((int value) {
-                                  return DropdownMenuItem<int>(
-                                    value: value,
-                                    child: Text(value.toString()),
-                                  );
-                                }).toList(),
-                              );
-                            }
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
+                          onChanged: (int newValue) {
+                            BlocProvider.of<SettingsDropdownBloc>(context)
+                                .add(ChangeNumberOfQuestion(newValue));
                           },
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Container(
-                            child: Text("ONLY WEAK QUESTION"),
-                          ),
-                        ),
-                        BlocBuilder<SettingsSwitchBloc, SettingsState>(
-                          builder: (context, state) {
-                            if (state is LoadedSettingsStateSwitch) {
-                              return Switch(
-                                value: state.onlyWeak,
-                                onChanged: (value) {
-                                  BlocProvider.of<SettingsSwitchBloc>(context)
-                                      .add(ChangeOnlyWeakSwitch(value));
-                                },
-                              );
-                            }
-                            return Center(
-                              child: CircularProgressIndicator(),
+                          items: <int>[1, 2, 3]
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(value.toString()),
                             );
+                          }).toList(),
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  )
+                ],
+              ),
+              SizedBox(height: 12,),
+              Row(
+                children: [
+                  Text("ONLY WEAK QUESTION"),
+                  SizedBox(width: 24,),
+                  BlocBuilder<SettingsSwitchBloc, SettingsState>(
+                    builder: (context, state) {
+                      if (state is LoadedSettingsStateSwitch) {
+                        return Switch(
+                          value: state.onlyWeak,
+                          onChanged: (value) {
+                            BlocProvider.of<SettingsSwitchBloc>(context)
+                                .add(ChangeOnlyWeakSwitch(value));
                           },
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

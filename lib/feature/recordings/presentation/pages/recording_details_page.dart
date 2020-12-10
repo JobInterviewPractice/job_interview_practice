@@ -37,7 +37,7 @@ class RecodingDetailsPage extends StatelessWidget {
             itemBuilder: (_, index) {
               final model = item.model.questions[index];
               return ListTile(
-                leading: Text(index.toString()),
+                leading: Text((index+1).toString()),
                 title: Text(model),
               );
             },

@@ -8,6 +8,7 @@ import 'package:job_interview_practice/feature/login/domain/repositories/login_r
 import 'package:job_interview_practice/feature/login/domain/usecases/login_usecase.dart';
 import 'package:job_interview_practice/feature/login/domain/usecases/register_usecase.dart';
 import 'package:job_interview_practice/feature/login/presentation/bloc/login_bloc.dart';
+import 'package:job_interview_practice/feature/question/data/datasources/questions_data_source.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository_impl.dart';
 import 'package:job_interview_practice/feature/recordings/data/datasources/recordings_local_data_source.dart';
@@ -27,6 +28,7 @@ import 'package:job_interview_practice/feature/splash/data/repositories/splash_r
 import 'package:job_interview_practice/feature/splash/domain/repositories/splash_repository.dart';
 import 'package:job_interview_practice/feature/splash/domain/usecases/splash_usecase.dart';
 import 'package:job_interview_practice/feature/splash/presentation/bloc/bloc.dart';
+import 'package:job_interview_practice/feature/start/domain/usecases/rate_question_use_case.dart';
 import 'package:job_interview_practice/feature/start/domain/usecases/select_random_question_use_case.dart';
 import 'package:job_interview_practice/feature/start/presentation/bloc/start_next_bloc.dart';
 
@@ -79,15 +81,20 @@ void _setupSettingsDependencies() {
 }
 
 void _setupStartDependencies() {
+  // data source
+  serviceLocator.registerSingleton<QuestionsDataSource>(QuestionsDataSourceImpl(serviceLocator()));
   //repositories
-  serviceLocator.registerFactory<QuestionRepository>(() => QuestionRepositoryImpl());
+  serviceLocator.registerFactory<QuestionRepository>(() => QuestionRepositoryImpl(dataSource: serviceLocator()));
   //usecases
   serviceLocator
       .registerFactory<SelectRandomQuestionUseCase>(() => SelectRandomQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<RateQuestionUseCase>(() => RateQuestionUseCase(repository: serviceLocator()));
 
   //blocs
-  serviceLocator.registerFactory<StartNextBloc>(
-      () => StartNextBloc(getNumberOfQuestionUseCase: serviceLocator(), selectRandomQuestionUseCase: serviceLocator()));
+  serviceLocator.registerFactory<StartNextBloc>(() => StartNextBloc(
+      getNumberOfQuestionUseCase: serviceLocator(),
+      selectRandomQuestionUseCase: serviceLocator(),
+      rateQuestionUseCase: serviceLocator()));
 }
 
 void _setupRecordingsDependencies() {
@@ -120,15 +127,18 @@ void _setupSplashDependencies() {
 
 void _setupLoginDependencies() {
   // data source
-  serviceLocator.registerSingleton<LoginRemoteDataSource>(LoginRemoteDataSourceImpl(serviceLocator(), serviceLocator()));
+  serviceLocator
+      .registerSingleton<LoginRemoteDataSource>(LoginRemoteDataSourceImpl(serviceLocator(), serviceLocator()));
 
   // repositories
-  serviceLocator.registerFactory<LoginRepository>(() => LoginRepositoryImpl(dataSource: serviceLocator(), remoteDateStore: serviceLocator()));
+  serviceLocator.registerFactory<LoginRepository>(
+      () => LoginRepositoryImpl(dataSource: serviceLocator(), remoteDateStore: serviceLocator()));
 
   //usecases
   serviceLocator.registerFactory<LoginUseCase>(() => LoginUseCase(repository: serviceLocator()));
   serviceLocator.registerFactory<RegisterUseCase>(() => RegisterUseCase(repository: serviceLocator()));
 
   // blocs
-  serviceLocator.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: serviceLocator(), registerUseCase: serviceLocator()));
+  serviceLocator
+      .registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: serviceLocator(), registerUseCase: serviceLocator()));
 }

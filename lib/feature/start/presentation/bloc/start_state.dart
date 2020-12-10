@@ -5,7 +5,7 @@ abstract class StartState {}
 class LoadingStartState extends StartState {}
 
 class LoadedStartState extends StartState {
-  final Question question;
+  final QuestionEntity question;
   final int numberOfAnswering;
   final int totalNumber;
 
@@ -13,6 +13,6 @@ class LoadedStartState extends StartState {
 }
 
 class FinishQuestionState extends StartState {
-  final List<Question> questions;
+  final List<QuestionEntity> questions;
   FinishQuestionState(this.questions);
 }

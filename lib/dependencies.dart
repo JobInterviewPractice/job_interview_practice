@@ -11,6 +11,8 @@ import 'package:job_interview_practice/feature/login/presentation/bloc/login_blo
 import 'package:job_interview_practice/feature/question/data/datasources/questions_data_source.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository_impl.dart';
+import 'package:job_interview_practice/feature/question/domain/usecases/get_all_questions_use_case.dart';
+import 'package:job_interview_practice/feature/question/presentation/bloc/question_bloc.dart';
 import 'package:job_interview_practice/feature/recordings/data/datasources/recordings_local_data_source.dart';
 import 'package:job_interview_practice/feature/recordings/data/repositories/recordings_repository_impl.dart';
 import 'package:job_interview_practice/feature/recordings/domain/repositories/recordings_repository.dart';
@@ -89,8 +91,11 @@ void _setupStartDependencies() {
   serviceLocator
       .registerFactory<SelectRandomQuestionUseCase>(() => SelectRandomQuestionUseCase(repository: serviceLocator()));
   serviceLocator.registerFactory<RateQuestionUseCase>(() => RateQuestionUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<GetAllQuestionsUseCase>(() => GetAllQuestionsUseCase(repository: serviceLocator()));
 
   //blocs
+  serviceLocator
+      .registerFactory<QuestionBloc>(() => QuestionBloc(useCase: serviceLocator()));
   serviceLocator.registerFactory<StartNextBloc>(() => StartNextBloc(
       getNumberOfQuestionUseCase: serviceLocator(),
       selectRandomQuestionUseCase: serviceLocator(),

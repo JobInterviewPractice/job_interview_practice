@@ -3,6 +3,7 @@ import 'package:job_interview_practice/core/presentation/common_widgets/appBar.d
 import 'package:job_interview_practice/feature/edit/presentation/pages/edit_page.dart';
 import 'package:job_interview_practice/feature/home/presentation/home_page.dart';
 import 'package:job_interview_practice/feature/login/presentation/pages/sign_up_page.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/questions_page.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/pages/recordings_page.dart';
 import 'package:job_interview_practice/feature/setting/presentation/pages/setting_page.dart';
 import 'package:job_interview_practice/feature/splash/presentation/pages/splash_page.dart';
@@ -37,6 +38,8 @@ class _MyAppState extends State<MyApp> {
             return _material(HomePage());
           case '/sign_up_page':
             return _material(SignUpPage());
+          case '/questions_page':
+            return _material(QuestionsPage());
           case '/':
             return _material(SplashPage());
           default:

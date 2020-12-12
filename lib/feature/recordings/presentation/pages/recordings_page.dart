@@ -5,7 +5,14 @@ import 'package:job_interview_practice/dependencies.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/bloc/recordings_bloc.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/pages/recording_details_page.dart';
 
-class RecordingsPage extends StatelessWidget {
+class RecordingsPage extends StatefulWidget {
+  @override
+  _RecordingsPageState createState() => _RecordingsPageState();
+}
+
+class _RecordingsPageState extends State<RecordingsPage> {
+  var _selectedValue = 'Play';
+  final _usStates = ["Play", "Delete"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +31,43 @@ class RecordingsPage extends StatelessWidget {
                 itemBuilder: (_, index) {
                   final item = state.models[index];
                   return ListTile(
-                    leading: Text(index.toString()),
-                    title: Text(item.title),
-                    subtitle: Text("Answered on ${item.model.questions.length} questions"),
-                    trailing: Icon(Icons.play_circle_fill),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
-                    },
+                      leading: Text(index.toString()),
+                      title: Text(item.title),
+                      subtitle: Text("Answered on ${item.model.questions.length} questions"),
+                      trailing: Scaffold(
+                        persistentFooterButtons: <Widget>[
+                          PopupMenuButton<String>(
+                            initialValue: _selectedValue,
+                            onSelected: (String s) {
+                              setState(() {
+                                _selectedValue = s;
+                              });
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return _usStates.map((String s) {
+                                return PopupMenuItem(
+                                  child: Text(s),
+                                  value: s,
+                                );
+                              }).toList();
+                            },
+                          )
+                        ],
+                        //    onTap: ()
+
+                      if (_selectedValue == "Play"){
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
+                      }else if (_selectedValue == "Delete"){
+                        builder: (BuildContext context, AsyncSnapshot<Tag> snapshot) {
+                      if (mapController.ready &&
+                        snapshot.hasData &&
+                        snapshot.data.mobile.nid != 0) {
+                        tag = snapshot.data;
+                        widget.tagStream.sink.add(Tag());
+                  }
+                  }
+                  },
+                  ),
                   );
                 },
               );

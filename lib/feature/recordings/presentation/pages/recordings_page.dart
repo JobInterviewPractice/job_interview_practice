@@ -53,9 +53,9 @@ class RecordingsPage extends StatelessWidget {
                             size: 20.0,
                             color: Colors.brown[900],
                           ),
-                          onPressed: () {
-                            state.models.removeAt(index);
-                            //   _onDeleteItemPressed(index);
+                          onPressed: () => {
+                            BlocProvider.of<RecordingsBloc>(context)
+                                .delete(index)
                           },
                         ),
                       ],

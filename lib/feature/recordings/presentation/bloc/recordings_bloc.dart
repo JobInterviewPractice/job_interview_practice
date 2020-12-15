@@ -16,7 +16,7 @@ class RecordingsBloc extends Bloc<RecordingsEvent, RecordingsState> {
   RecordingsBloc({this.getRecordingsUseCase}) : super(RecordingsInitial()) {
     add(RecordingsEvent());
   }
-
+// this this
   @override
   Stream<RecordingsState> mapEventToState(RecordingsEvent event) async* {
     final result = await getRecordingsUseCase(NoInput());
@@ -26,7 +26,8 @@ class RecordingsBloc extends Bloc<RecordingsEvent, RecordingsState> {
       final formatter = DateFormat('yyyy-MM-dd, HH:mm EEE');
       final items = r.map((e) {
         final dateString = e.videoPath.split('/').last.replaceAll('.mp4', '');
-        final dateTime = DateTime.fromMillisecondsSinceEpoch(int.parse(dateString));
+        final dateTime =
+            DateTime.fromMillisecondsSinceEpoch(int.parse(dateString));
         return RecordingItem(e, formatter.format(dateTime));
       }).toList();
       yield Recordings(items);

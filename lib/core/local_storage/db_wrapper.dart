@@ -20,4 +20,11 @@ class DBWrapper {
     final recordingsBox = Hive.box<RecordingModel>(RECORDINGS);
     return recordingsBox.keys.map<RecordingModel>((e) => recordingsBox.get(e)).toList();
   }
+
+  Future<void> deleteRecordings(String id) async {
+    final recordings = getRecordings();
+    final index = recordings.indexWhere((element) => element.videoPath == id);
+    final recordingsBox = Hive.box<RecordingModel>(RECORDINGS);
+    recordingsBox.deleteAt(index);
+  }
 }

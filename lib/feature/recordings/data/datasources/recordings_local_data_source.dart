@@ -3,6 +3,7 @@ import 'package:job_interview_practice/feature/start/domain/entities/recording_m
 
 abstract class RecordingsLocalDataSource {
   Future<List<RecordingModel>> getRecordings();
+  Future<void> deleteRecording(String recordingId);
 }
 
 class RecordingsLocalDataSourceImpl extends RecordingsLocalDataSource {
@@ -11,5 +12,10 @@ class RecordingsLocalDataSourceImpl extends RecordingsLocalDataSource {
 
   Future<List<RecordingModel>> getRecordings() async {
     return dbWrapper.getRecordings();
+  }
+
+  @override
+  Future<void> deleteRecording(String recordingId) {
+    return dbWrapper.deleteRecordings(recordingId);
   }
 }

@@ -7,7 +7,7 @@ class MyAppBar extends AppBar {
       : super(
           backgroundColor: Colors.teal,
           title: Text(
-            'Get The Job!',
+            apptitle,
             style: TextStyle(fontSize: 20),
           ),
         );

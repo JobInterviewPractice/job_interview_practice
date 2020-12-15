@@ -1,10 +1,13 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:job_interview_practice/feature/login/data/model/user_model.dart';
 import 'package:job_interview_practice/feature/question/data/models/question_model.dart';
+import 'package:job_interview_practice/feature/question/data/models/questions_user_model.dart';
 
 abstract class QuestionsDataSource {
   Future<List<QuestionModel>> getRandomQuestions(int limit);
+  Future<List<QuestionUserModel>> getAllQuestions();
   Future<void> rateQuestion(String questionId, int rate);
 }
 
@@ -21,6 +24,18 @@ class QuestionsDataSourceImpl extends QuestionsDataSource {
       final query = result.docs[random.nextInt(result.docs.length)];
       return QuestionModel.fromMap(query.data(), query.id);
     });
+  }
+
+  @override
+  Future<List<QuestionUserModel>> getAllQuestions() async {
+    final queryQuestions = await _store.collection('questions').get();
+    final questions = queryQuestions.docs.map((e) => QuestionModel.fromMap(e.data(), e.id)).toList();
+    final queryUsers = await _store.collection('users').where('userId', whereIn: questions.map((e) => e.userId).toList()).get();
+    final users = queryUsers.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    return questions.map((e) => QuestionUserModel(
+      questionModel: e,
+      userModel: users.firstWhere((element) => element.userId == e.userId)
+    )).toList();
   }
 
   @override

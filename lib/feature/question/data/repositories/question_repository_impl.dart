@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:job_interview_practice/core/error/failure.dart';
 import 'package:job_interview_practice/feature/question/data/datasources/questions_data_source.dart';
 import 'package:job_interview_practice/feature/question/data/models/question_model.dart';
+import 'package:job_interview_practice/feature/question/data/models/questions_user_model.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 
 class QuestionRepositoryImpl implements QuestionRepository {
@@ -19,5 +20,10 @@ class QuestionRepositoryImpl implements QuestionRepository {
   @override
   Future<void> rateQuestion(String questionId, int rate) {
     return dataSource.rateQuestion(questionId, rate);
+  }
+
+  @override
+  Future<List<QuestionUserModel>> getAll() {
+    return dataSource.getAllQuestions();
   }
 }

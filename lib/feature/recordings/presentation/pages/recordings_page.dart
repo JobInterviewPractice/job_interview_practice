@@ -5,20 +5,14 @@ import 'package:job_interview_practice/dependencies.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/bloc/recordings_bloc.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/pages/recording_details_page.dart';
 
-class RecordingsPage extends StatefulWidget {
-  @override
-  _RecordingsPageState createState() => _RecordingsPageState();
-}
-
-class _RecordingsPageState extends State<RecordingsPage> {
-  var _selectedValue = 'Play';
-  final _usStates = ["Play", "Delete"];
+class RecordingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
         appBarTitle: "Recordings",
       ),
+      //Dismissible
       body: BlocBuilder<RecordingsBloc, RecordingsState>(
           cubit: serviceLocator<RecordingsBloc>(),
           builder: (context, state) {
@@ -31,43 +25,41 @@ class _RecordingsPageState extends State<RecordingsPage> {
                 itemBuilder: (_, index) {
                   final item = state.models[index];
                   return ListTile(
-                      leading: Text(index.toString()),
-                      title: Text(item.title),
-                      subtitle: Text("Answered on ${item.model.questions.length} questions"),
-                      trailing: Scaffold(
-                        persistentFooterButtons: <Widget>[
-                          PopupMenuButton<String>(
-                            initialValue: _selectedValue,
-                            onSelected: (String s) {
-                              setState(() {
-                                _selectedValue = s;
-                              });
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return _usStates.map((String s) {
-                                return PopupMenuItem(
-                                  child: Text(s),
-                                  value: s,
-                                );
-                              }).toList();
-                            },
-                          )
-                        ],
-                        //    onTap: ()
+                    leading: Text(index.toString()),
+                    title: Text(item.title),
+                    subtitle: Text(
+                        "Answered on ${item.model.questions.length} questions"),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.play_arrow_outlined,
+                            size: 25.0,
+                            color: Colors.brown[900],
+                          ),
+                          onPressed: () {
+                            //   _onDeleteItemPressed(index);
 
-                      if (_selectedValue == "Play"){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
-                      }else if (_selectedValue == "Delete"){
-                        builder: (BuildContext context, AsyncSnapshot<Tag> snapshot) {
-                      if (mapController.ready &&
-                        snapshot.hasData &&
-                        snapshot.data.mobile.nid != 0) {
-                        tag = snapshot.data;
-                        widget.tagStream.sink.add(Tag());
-                  }
-                  }
-                  },
-                  ),
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => RecodingDetailsPage(item)));
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.delete_outline,
+                            size: 20.0,
+                            color: Colors.brown[900],
+                          ),
+                          onPressed: () {
+                            state.models.removeAt(index);
+                            //   _onDeleteItemPressed(index);
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               );

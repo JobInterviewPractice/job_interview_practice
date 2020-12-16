@@ -168,6 +168,7 @@ void _setupLoginDependencies() {
       loginUseCase: serviceLocator(), registerUseCase: serviceLocator()));
 }
 
+// addQuestions
 void _setupQuestionAdddDependencies() {
   serviceLocator.registerFactory<QuestionAddBloc>(
       () => QuestionAddBloc(insertUseCase: serviceLocator()));

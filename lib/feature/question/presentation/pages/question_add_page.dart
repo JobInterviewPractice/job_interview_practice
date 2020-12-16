@@ -20,7 +20,8 @@ class QuestionAddPage extends StatelessWidget {
             children: [
               Form(
                 key: _formKey,
-                child: BlocBuilder(builder: (context, state) {
+                child: BlocBuilder<QuestionAddBloc, QuestionState>(
+                    builder: (context, state) {
                   if (state is QuestionAddPageLoaded) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

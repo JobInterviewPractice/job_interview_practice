@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:job_interview_practice/dependencies.dart';
 import 'package:job_interview_practice/feature/question/data/models/questions_user_model.dart';
 import 'package:job_interview_practice/feature/question/presentation/bloc/question_bloc.dart';
+import 'package:job_interview_practice/feature/question/presentation/pages/question_add_page.dart';
 
 class QuestionsPage extends StatelessWidget {
   @override
@@ -11,20 +12,30 @@ class QuestionsPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => serviceLocator<QuestionBloc>()..add(QuestionEvent()),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.teal,
-          title: Text('Questions'),
-          actions: [
-            IconButton(icon: Icon(Icons.add), onPressed: () {
-              // TODO Motoyuki
-              // TODO open new page to add new question
-            },)
-          ],
-        ),
-        body: Builder(
-          builder: (context) {
-            return BlocBuilder<QuestionBloc, QuestionState>(
-              builder: (context, state) {
+          appBar: AppBar(
+            backgroundColor: Colors.teal,
+            title: Text('Questions'),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  // TODO Motoyuki
+                  // TODO open new page to add new question
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuestionAddPage(),
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
+          body: Builder(
+            builder: (context) {
+              return BlocBuilder<QuestionBloc, QuestionState>(
+                  builder: (context, state) {
                 if (state is QuestionsLoaded) {
                   return ListView.builder(
                     itemCount: state.questions.length,
@@ -37,11 +48,9 @@ class QuestionsPage extends StatelessWidget {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              }
-            );
-          },
-        )
-      ),
+              });
+            },
+          )),
     );
   }
 }
@@ -55,14 +64,17 @@ class PostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ]),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ]),
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
@@ -88,7 +100,8 @@ class PostWidget extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 model.userModel.name,
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
                               ),
                             ),
                             SizedBox(
@@ -110,7 +123,8 @@ class PostWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 2),
+              padding:
+                  const EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 2),
               child: Text(
                 "Question text:",
                 style: TextStyle(fontWeight: FontWeight.w700),
@@ -123,7 +137,10 @@ class PostWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
               child: RatingBarIndicator(
-                itemBuilder: (_, __) => Icon(Icons.star, color: Colors.amber,),
+                itemBuilder: (_, __) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
                 itemCount: 5,
                 itemSize: 16,
                 rating: model.questionModel.rate,

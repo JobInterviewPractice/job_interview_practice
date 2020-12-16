@@ -32,26 +32,17 @@ class QuestionAddPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
-                            if (_formKey.currentState.validate()) {
-                              // Process data.
-                            }
+                            Navigator.pop(context);
                           },
-                          child: Text('Submit'),
+                          child: Text('Back'),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
-                            if (_formKey.currentState.validate()) {
-                              // Process data.
-                            }
-                          },
-                          child: Text('Submit'),
+                          onPressed: () {},
+                          child: Text('Register'),
                         ),
                       ],
                     ),

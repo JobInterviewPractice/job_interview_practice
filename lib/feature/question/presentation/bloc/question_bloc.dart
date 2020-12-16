@@ -21,14 +21,16 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   }
 }
 
-class QuestionAddBloc extends Bloc<QuestionAddEvent, QuestionState> {
+class QuestionAddBloc extends Bloc<QuestionEvent, QuestionState> {
   final InsertQuestionUseCase insertUseCase;
   QuestionAddBloc({this.insertUseCase}) : super(QuestionAddPageLoaded());
   @override
-  Stream<QuestionState> mapEventToState(QuestionAddEvent event) async* {
+  Stream<QuestionState> mapEventToState(QuestionEvent event) async* {
     if (event is QuestionAddPageLoadedEvent) {
       yield QuestionAddPageLoaded();
-    } else  if (event is QuestionAddEvent) {
+    } else if (event is QuestionChangeTextEvent) {
+      yield QuestionAddTextChanged(editingQuestionText: event.questionText);
+    } else if (event is QuestionAddEvent) {
       insertUseCase(event.questionText);
     }
   }

@@ -13,6 +13,7 @@ import 'package:job_interview_practice/feature/question/data/datasources/questio
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository.dart';
 import 'package:job_interview_practice/feature/question/data/repositories/question_repository_impl.dart';
 import 'package:job_interview_practice/feature/question/domain/usecases/get_all_questions_use_case.dart';
+import 'package:job_interview_practice/feature/question/domain/usecases/insert_question_use_case.dart';
 import 'package:job_interview_practice/feature/question/presentation/bloc/question_bloc.dart';
 import 'package:job_interview_practice/feature/recordings/data/datasources/recordings_local_data_source.dart';
 import 'package:job_interview_practice/feature/recordings/data/repositories/recordings_repository_impl.dart';
@@ -170,6 +171,9 @@ void _setupLoginDependencies() {
 
 // addQuestions
 void _setupQuestionAdddDependencies() {
+  serviceLocator.registerFactory<InsertQuestionUseCase>(
+      () => InsertQuestionUseCase(repository: serviceLocator()));
+
   serviceLocator.registerFactory<QuestionAddBloc>(
       () => QuestionAddBloc(insertUseCase: serviceLocator()));
 }

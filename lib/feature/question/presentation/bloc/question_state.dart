@@ -11,3 +11,8 @@ class QuestionsLoaded extends QuestionState {
 }
 
 class QuestionAddPageLoaded extends QuestionState {}
+
+class QuestionAddTextChanged extends QuestionState {
+  String editingQuestionText;
+  QuestionAddTextChanged({this.editingQuestionText});
+}

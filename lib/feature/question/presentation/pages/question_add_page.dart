@@ -37,8 +37,8 @@ class QuestionAddPage extends StatelessWidget {
                             return null;
                           },
                           onChanged: (String input) => {
-                            BlocProvider.of<QuestionAddBloc>(context)
-                                .add(QuestionAddEvent(questionText: input))
+                            BlocProvider.of<QuestionAddBloc>(context).add(
+                                QuestionChangeTextEvent(questionText: input))
                           },
                         ),
                         Padding(
@@ -54,6 +54,51 @@ class QuestionAddPage extends StatelessWidget {
                               ),
                               ElevatedButton(
                                 onPressed: () {},
+                                child: Text('Register'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if (state is QuestionAddTextChanged) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            hintText: 'Question Text Here...',
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          onChanged: (String input) => {
+                            BlocProvider.of<QuestionAddBloc>(context).add(
+                                QuestionChangeTextEvent(questionText: input))
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Back'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  print(state.editingQuestionText);
+                                  BlocProvider.of<QuestionAddBloc>(context).add(
+                                      QuestionAddEvent(
+                                          questionText:
+                                              state.editingQuestionText));
+                                },
                                 child: Text('Register'),
                               ),
                             ],

@@ -61,9 +61,11 @@ class QuestionsDataSourceImpl extends QuestionsDataSource {
   }
 
   @override
-  Future<void> insertQuestion(String questionText) {
-    _store.collection('questions').add({
+  Future<void> insertQuestion(String questionText) async {
+    final result = await _store.collection('questions').add({
       questionText: questionText,
     });
+
+    result.set({'createdAt': Timestamp.now()}, SetOptions(merge: true));
   }
 }

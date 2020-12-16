@@ -5,4 +5,6 @@ abstract class QuestionRepository {
   Future<List<QuestionModel>> selectByRandom(int numberOfQuestion);
   Future<List<QuestionUserModel>> getAll();
   Future<void> rateQuestion(String questionId, int rate);
+
+  Future<void> insert(String questionText);
 }

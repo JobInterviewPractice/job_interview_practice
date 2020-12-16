@@ -1,7 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:job_interview_practice/core/error/failure.dart';
 import 'package:job_interview_practice/feature/question/data/datasources/questions_data_source.dart';
 import 'package:job_interview_practice/feature/question/data/models/question_model.dart';
 import 'package:job_interview_practice/feature/question/data/models/questions_user_model.dart';
@@ -25,5 +21,9 @@ class QuestionRepositoryImpl implements QuestionRepository {
   @override
   Future<List<QuestionUserModel>> getAll() {
     return dataSource.getAllQuestions();
+  }
+
+  Future<void> insert(String questionText) async {
+    final result = await dataSource.insertQuestion(questionText);
   }
 }

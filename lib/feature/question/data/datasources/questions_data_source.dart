@@ -9,6 +9,7 @@ abstract class QuestionsDataSource {
   Future<List<QuestionModel>> getRandomQuestions(int limit);
   Future<List<QuestionUserModel>> getAllQuestions();
   Future<void> rateQuestion(String questionId, int rate);
+  Future<void> insertQuestion(String questionText);
 }
 
 class QuestionsDataSourceImpl extends QuestionsDataSource {
@@ -29,13 +30,21 @@ class QuestionsDataSourceImpl extends QuestionsDataSource {
   @override
   Future<List<QuestionUserModel>> getAllQuestions() async {
     final queryQuestions = await _store.collection('questions').get();
-    final questions = queryQuestions.docs.map((e) => QuestionModel.fromMap(e.data(), e.id)).toList();
-    final queryUsers = await _store.collection('users').where('userId', whereIn: questions.map((e) => e.userId).toList()).get();
-    final users = queryUsers.docs.map((e) => UserModel.fromMap(e.data())).toList();
-    return questions.map((e) => QuestionUserModel(
-      questionModel: e,
-      userModel: users.firstWhere((element) => element.userId == e.userId)
-    )).toList();
+    final questions = queryQuestions.docs
+        .map((e) => QuestionModel.fromMap(e.data(), e.id))
+        .toList();
+    final queryUsers = await _store
+        .collection('users')
+        .where('userId', whereIn: questions.map((e) => e.userId).toList())
+        .get();
+    final users =
+        queryUsers.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    return questions
+        .map((e) => QuestionUserModel(
+            questionModel: e,
+            userModel:
+                users.firstWhere((element) => element.userId == e.userId)))
+        .toList();
   }
 
   @override
@@ -49,5 +58,12 @@ class QuestionsDataSourceImpl extends QuestionsDataSource {
       });
     });
     return;
+  }
+
+  @override
+  Future<void> insertQuestion(String questionText) {
+    _store.collection('questions').add({
+      questionText: questionText,
+    });
   }
 }

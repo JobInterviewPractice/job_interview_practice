@@ -4,7 +4,9 @@ abstract class QuestionEvents {}
 
 class QuestionEvent extends QuestionEvents {}
 
+class QuestionAddPageLoadedEvent extends QuestionEvents {}
+
 class QuestionAddEvent extends QuestionEvent {
-  final String qustionText;
-  QuestionAddEvent({this.qustionText});
+  final String questionText;
+  QuestionAddEvent({this.questionText});
 }

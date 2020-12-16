@@ -10,4 +10,4 @@ class QuestionsLoaded extends QuestionState {
   QuestionsLoaded(this.questions);
 }
 
-class QuestionAdded extends QuestionState {}
+class QuestionAddPageLoaded extends QuestionState {}

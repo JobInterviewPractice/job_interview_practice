@@ -48,6 +48,7 @@ void setupDependencies() {
   _setupRecordingsDependencies();
   _setupSplashDependencies();
   _setupLoginDependencies();
+  _setupQuestionAdddDependencies();
 }
 
 void _setupCommonDependencies() {
@@ -146,4 +147,8 @@ void _setupLoginDependencies() {
   // blocs
   serviceLocator
       .registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: serviceLocator(), registerUseCase: serviceLocator()));
+}
+
+void _setupQuestionAdddDependencies() {
+  serviceLocator.registerFactory<QuestionAddBloc>(() => QuestionAddBloc(useCase: serviceLocator()));
 }

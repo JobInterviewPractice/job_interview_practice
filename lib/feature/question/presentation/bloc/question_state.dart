@@ -9,3 +9,5 @@ class QuestionsLoaded extends QuestionState {
   final List<QuestionUserModel> questions;
   QuestionsLoaded(this.questions);
 }
+
+class QuestionAdded extends QuestionState {}

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:job_interview_practice/core/logic/usecase.dart';
 import 'package:job_interview_practice/feature/question/data/models/questions_user_model.dart';
 import 'package:job_interview_practice/feature/question/domain/usecases/get_all_questions_use_case.dart';
+import 'package:job_interview_practice/feature/question/domain/usecases/insert_question_use_case.dart';
 import 'package:meta/meta.dart';
 
 part 'question_event.dart';
@@ -18,4 +19,11 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     final result = await useCase(NoInput());
     yield QuestionsLoaded(result);
   }
+}
+
+class QuestionAddBloc extends Bloc<QuestionAddEvent, QuestionState> {
+  final InsertQuestionUseCase useCase;
+  QuestionAddBloc({this.useCase}) : super(QuestionAdded());
+  @override
+  Stream<QuestionState> mapEventToState(QuestionAddEvent event) async* {}
 }

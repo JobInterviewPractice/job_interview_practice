@@ -8,13 +8,14 @@ import 'package:job_interview_practice/feature/recordings/presentation/pages/rec
 class RecordingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(
-        appBarTitle: "Recordings",
-      ),
-      body: BlocBuilder<RecordingsBloc, RecordingsState>(
-          cubit: serviceLocator<RecordingsBloc>(),
-          builder: (context, state) {
+    return BlocProvider(
+      create: (_) => serviceLocator<RecordingsBloc>(),
+      child: Builder(
+        builder: (context) => Scaffold(
+          appBar: MyAppBar(
+            appBarTitle: "Recordings",
+          ),
+          body: BlocBuilder<RecordingsBloc, RecordingsState>(builder: (context, state) {
             if (state is Recordings) {
               return ListView.separated(
                 itemCount: state.models.length,
@@ -24,13 +25,37 @@ class RecordingsPage extends StatelessWidget {
                 itemBuilder: (_, index) {
                   final item = state.models[index];
                   return ListTile(
-                    leading: Text((index+1).toString()),
+                    leading: Text((index + 1).toString()),
                     title: Text(item.title),
                     subtitle: Text("Answered on ${item.model.questions.length} questions"),
-                    trailing: Icon(Icons.play_circle_fill),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
-                    },
+                    trailing: PopupMenuButton(
+                        itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 1,
+                                child: Text(
+                                  'Play',
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 2,
+                                child: Text('Delete'),
+                              ),
+                            ],
+                        onSelected: (index) {
+                          switch (index) {
+                            case 1:
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => RecodingDetailsPage(item)));
+                              break;
+                            case 2:
+                              BlocProvider.of<RecordingsBloc>(context).add(DeleteRecording(item.model.videoPath));
+                              break;
+                          }
+                        },
+                        child: Icon(
+                          Icons.more_vert,
+                          size: 28,
+                          color: Colors.black,
+                        )),
                   );
                 },
               );
@@ -44,6 +69,8 @@ class RecordingsPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }),
+        ),
+      ),
     );
   }
 }

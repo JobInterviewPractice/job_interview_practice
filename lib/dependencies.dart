@@ -16,6 +16,7 @@ import 'package:job_interview_practice/feature/question/presentation/bloc/questi
 import 'package:job_interview_practice/feature/recordings/data/datasources/recordings_local_data_source.dart';
 import 'package:job_interview_practice/feature/recordings/data/repositories/recordings_repository_impl.dart';
 import 'package:job_interview_practice/feature/recordings/domain/repositories/recordings_repository.dart';
+import 'package:job_interview_practice/feature/recordings/domain/usecases/delete_recording_use_case.dart';
 import 'package:job_interview_practice/feature/recordings/domain/usecases/get_recordings_usecase.dart';
 import 'package:job_interview_practice/feature/recordings/presentation/bloc/recordings_bloc.dart';
 import 'package:job_interview_practice/feature/setting/data/datasources/settings_data_source.dart';
@@ -111,9 +112,10 @@ void _setupRecordingsDependencies() {
 
   //usecases
   serviceLocator.registerFactory<GetRecordingsUseCase>(() => GetRecordingsUseCase(repository: serviceLocator()));
+  serviceLocator.registerFactory<DeleteRecordingUseCase>(() => DeleteRecordingUseCase(repository: serviceLocator()));
 
   // blocs
-  serviceLocator.registerFactory<RecordingsBloc>(() => RecordingsBloc(getRecordingsUseCase: serviceLocator()));
+  serviceLocator.registerFactory<RecordingsBloc>(() => RecordingsBloc(getRecordingsUseCase: serviceLocator(), deleteRecordingUseCase: serviceLocator()));
 }
 
 void _setupSplashDependencies() {

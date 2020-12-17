@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_interview_practice/core/presentation/common_widgets/appBar.dart';
+import 'package:job_interview_practice/feature/add_question/presentation/pages/add_question_page.dart';
 import 'package:job_interview_practice/feature/edit/presentation/pages/edit_page.dart';
 import 'package:job_interview_practice/feature/home/presentation/home_page.dart';
 import 'package:job_interview_practice/feature/login/presentation/pages/sign_up_page.dart';
@@ -18,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Get The Job',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -40,6 +42,8 @@ class _MyAppState extends State<MyApp> {
             return _material(SignUpPage());
           case '/questions_page':
             return _material(QuestionsPage());
+          case '/add_question_page':
+            return _material(AddQuestionPage());
           case '/':
             return _material(SplashPage());
           default:

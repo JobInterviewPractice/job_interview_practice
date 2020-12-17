@@ -30,7 +30,7 @@ class QuestionsDataSourceImpl extends QuestionsDataSource {
   Future<List<QuestionUserModel>> getAllQuestions() async {
     final queryQuestions = await _store.collection('questions').get();
     final questions = queryQuestions.docs.map((e) => QuestionModel.fromMap(e.data(), e.id)).toList();
-    final queryUsers = await _store.collection('users').where('userId', whereIn: questions.map((e) => e.userId).toList()).get();
+    final queryUsers = await _store.collection('users').where('userId', whereIn: questions.map((e) => e.userId).toSet().toList()).get();
     final users = queryUsers.docs.map((e) => UserModel.fromMap(e.data())).toList();
     return questions.map((e) => QuestionUserModel(
       questionModel: e,

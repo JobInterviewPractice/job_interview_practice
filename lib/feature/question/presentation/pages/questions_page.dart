@@ -10,37 +10,42 @@ class QuestionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => serviceLocator<QuestionBloc>()..add(QuestionEvent()),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.teal,
-          title: Text('Questions'),
-          actions: [
-            IconButton(icon: Icon(Icons.add), onPressed: () {
-              // TODO Motoyuki
-              // TODO open new page to add new question
-            },)
-          ],
-        ),
-        body: Builder(
-          builder: (context) {
-            return BlocBuilder<QuestionBloc, QuestionState>(
-              builder: (context, state) {
-                if (state is QuestionsLoaded) {
-                  return ListView.builder(
-                    itemCount: state.questions.length,
-                    itemBuilder: (_, index) {
-                      final item = state.questions[index];
-                      return PostWidget(item);
-                    },
+      child: Builder(
+        builder: (context) => Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.teal,
+              title: Text('Questions'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/add_question_page').then((value) {
+                      if (value != null) {
+                        BlocProvider.of<QuestionBloc>(context).add(QuestionEvent());
+                      }
+                    });
+                  },
+                )
+              ],
+            ),
+            body: Builder(
+              builder: (context) {
+                return BlocBuilder<QuestionBloc, QuestionState>(builder: (context, state) {
+                  if (state is QuestionsLoaded) {
+                    return ListView.builder(
+                      itemCount: state.questions.length,
+                      itemBuilder: (_, index) {
+                        final item = state.questions[index];
+                        return PostWidget(item);
+                      },
+                    );
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            );
-          },
-        )
+                });
+              },
+            )),
       ),
     );
   }
@@ -123,7 +128,10 @@ class PostWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
               child: RatingBarIndicator(
-                itemBuilder: (_, __) => Icon(Icons.star, color: Colors.amber,),
+                itemBuilder: (_, __) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
                 itemCount: 5,
                 itemSize: 16,
                 rating: model.questionModel.rate,

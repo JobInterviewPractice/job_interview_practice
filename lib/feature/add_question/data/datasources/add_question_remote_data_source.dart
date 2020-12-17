@@ -17,7 +17,7 @@ class AddQuestionRemoteDataSourceImpl extends AddQuestionRemoteDataSource {
 
     await _store
         .collection("questions")
-        .add({'createdAt': Timestamp.now(), 'questionText': questionText, 'userid': auth.uid});
+        .add({'createdAt': Timestamp.now(), 'questionText': questionText, 'userid': auth.uid, 'rate': []});
     return NoOutput();
   }
 }
